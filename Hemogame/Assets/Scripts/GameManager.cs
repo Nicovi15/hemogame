@@ -16,6 +16,18 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject CanvasPanelObject;
 
+    [SerializeField]
+    GameObject findUI;
+
+    [SerializeField]
+    GameObject VerifUI;
+
+    [SerializeField]
+    CameraFollowCircle CFC;
+
+    [SerializeField]
+    Camera mainCam;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +38,13 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void transiVerif()
+    {
+        mainCam.rect = new Rect(0, 0, 0.6f, 1);
+        findUI.SetActive(false);
+        VerifUI.SetActive(true);
     }
 
     public GameObject getObjects()

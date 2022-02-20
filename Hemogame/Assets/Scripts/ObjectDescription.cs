@@ -13,4 +13,15 @@ public class ObjectDescription : ScriptableObject
     public string description;
 
     public bool valid;
+
+    public bool isExplained;
+
+    [TextArea(0, 3)]
+    public string explication;
+
+    public bool isBonGeste;
+
+    [TextArea(0, 3)]
+    public string bonGeste;
+
 }

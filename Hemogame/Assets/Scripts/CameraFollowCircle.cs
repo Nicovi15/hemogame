@@ -7,6 +7,8 @@ public class CameraFollowCircle : MonoBehaviour
     [SerializeField]
     CircleCameraTrajectory CCT;
 
+    public Transform target;
+
     public float theta = 0;
 
     public float speed;
@@ -14,7 +16,7 @@ public class CameraFollowCircle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        target = CCT.center;
     }
 
     // Update is called once per frame
@@ -36,6 +38,6 @@ public class CameraFollowCircle : MonoBehaviour
         float z = CCT.radius * Mathf.Sin(theta);
         this.transform.position = CCT.center.position + new Vector3(x, CCT.center.position.y, z);
 
-        this.transform.LookAt(CCT.center);
+        this.transform.LookAt(target);
     }
 }
