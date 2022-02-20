@@ -16,3 +16,8 @@ MonoBehaviour:
   isDescribed: 0
   description: 
   valid: 1
+  isExplained: 0
+  explication: "Cette bo\xEEte n'a pas de coins arrondis. Il est facile de se blesser
+    en se cognant avec."
+  isBonGeste: 0
+  bonGeste: Il faut appeler les pompiers au plus vite.

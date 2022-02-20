@@ -17,3 +17,9 @@ MonoBehaviour:
   description: "Thermos rempli d'un liquide tr\xE8s chaud.\nC'est peut-\xEAtre du
     caf\xE9 ?"
   valid: 1
+  isExplained: 1
+  explication: "Un thermos contenant un liquide chaud peut \xEAtre dangereux. En
+    effet, si son contenant vient \xE0 br\xFBler ..."
+  isBonGeste: 1
+  bonGeste: "Il faut imm\xE9diatement passer la br\xFBlure \xE0 l'eau froide. Puis,
+    ..."

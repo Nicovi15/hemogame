@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public bool findingPhase;
+
     [SerializeField]
     GameObject Objects;
 
@@ -31,7 +33,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        findingPhase = true;
     }
 
     // Update is called once per frame
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
 
     public void transiVerif()
     {
+        findingPhase = false;
         mainCam.rect = new Rect(0, 0, 0.6f, 1);
         findUI.SetActive(false);
         VerifUI.SetActive(true);
@@ -65,5 +68,10 @@ public class GameManager : MonoBehaviour
     public GameObject getCanvasPanelObject()
     {
         return CanvasPanelObject;
+    }
+
+    public void setCFCtarget(GameObject go)
+    {
+        CFC.target = go.transform;
     }
 }
