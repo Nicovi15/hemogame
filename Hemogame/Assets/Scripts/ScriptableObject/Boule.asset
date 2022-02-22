@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6275c1268302774e8ecac5fd32ff127, type: 3}
   m_Name: Boule
   m_EditorClassIdentifier: 
-  nameObject: Boule
+  nameObject: Balle en mousse
   isDescribed: 1
   description: "C'est une sph\xE8re parfaite!"
   valid: 0
+  isExplained: 0
+  explication: "La balle \xE9tant en mousse, elle n'est pas dangereuse."
+  isBonGeste: 0
+  bonGeste: 
+  inspecPos: {x: 0, y: 0, z: 0}
+  inspecScale: {x: 2, y: 2, z: 2}
+  inspecRot: {x: 0, y: 0, z: 0}

@@ -1,0 +1,227 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 16123,
+      "max": [
+        0.5430977940559387,
+        -0.027380799874663353,
+        0.6766675710678101
+      ],
+      "min": [
+        -0.8447635173797607,
+        -2.173377275466919,
+        -0.5143861770629883
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 193476,
+      "componentType": 5126,
+      "count": 16123,
+      "max": [
+        0.9999912977218628,
+        0.9999999403953552,
+        0.9999951720237732
+      ],
+      "min": [
+        -0.9998539090156555,
+        -0.9998952150344849,
+        -0.9999554753303528
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 16123,
+      "max": [
+        0.9998010993003845,
+        0.9999659061431885,
+        0.997801661491394,
+        1.0
+      ],
+      "min": [
+        -0.9988744854927063,
+        -0.9999992251396179,
+        -0.9993811845779419,
+        1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 16123,
+      "max": [
+        0.9996680021286011,
+        0.9899899959564209
+      ],
+      "min": [
+        0.00024399999529123306,
+        0.0002460000105202198
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 75000,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Thomas Flynn (https://sketchfab.com/nebulousflynn)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/colossal-bust-ramesses-ii-62ffe231f1664b84ae8c263a77b83e15",
+      "title": "Colossal Bust Ramesses II"
+    },
+    "generator": "Sketchfab-12.54.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 300000,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 128984,
+      "byteOffset": 300000,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 386952,
+      "byteOffset": 428984,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 257968,
+      "byteOffset": 815936,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 1073904,
+      "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/Colossal_Bust_Rameses_II_baseColor.jpeg"
+    },
+    {
+      "uri": "textures/Colossal_Bust_Rameses_II_normal.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "Colossal_Bust_Rameses_II",
+      "normalTexture": {
+        "index": 1
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Object_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0115795135498047,
+        1.6267439006600154e-16,
+        1.626743900660016e-16,
+        0.0,
+        1.6267439006600156e-16,
+        -1.0115795135498047,
+        0.0,
+        0.0,
+        1.6267439006600156e-16,
+        0.0,
+        -1.0115795135498047,
+        0.0,
+        1.6653345369377348e-16,
+        -1.0192408561706545,
+        1.1815230846405027,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "Colossal_Bust_Rameses_II.obj.cleaner.materialmerger.gles"
+    },
+    {
+      "mesh": 0,
+      "name": "Object_2"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    }
+  ]
+}

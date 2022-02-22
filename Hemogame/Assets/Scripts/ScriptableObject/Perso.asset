@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6275c1268302774e8ecac5fd32ff127, type: 3}
+  m_Name: Perso
+  m_EditorClassIdentifier: 
+  nameObject: "El\xE8ve de la classe turbulent"
+  isDescribed: 0
+  description: Il fait du shadow boxing.
+  valid: 1
+  isExplained: 0
+  explication: "Il a la f\xE2cheuse tendance \xE0 se battre avec ses camarades de
+    classe."
+  isBonGeste: 0
+  bonGeste: Il faut ...
+  inspecPos: {x: 0, y: 0, z: 0}
+  inspecScale: {x: 36, y: 36, z: 36}
+  inspecRot: {x: -90, y: 0, z: 0}

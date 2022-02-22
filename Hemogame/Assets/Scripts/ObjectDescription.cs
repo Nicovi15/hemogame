@@ -24,4 +24,8 @@ public class ObjectDescription : ScriptableObject
     [TextArea(0, 3)]
     public string bonGeste;
 
+    public Vector3 inspecPos;
+    public Vector3 inspecScale;
+    public Vector3 inspecRot;
+
 }

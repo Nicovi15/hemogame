@@ -129,7 +129,8 @@ public class ClickObject : MonoBehaviour
                     transform.SetParent(GM.getObjects().transform);
             }
 
-            panel.SendMessage("setIsSelected", isSelected);
+            if(panel != null)
+                panel.SendMessage("setIsSelected", isSelected);
         }
         
     }

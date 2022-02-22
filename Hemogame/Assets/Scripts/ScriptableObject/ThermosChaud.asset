@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6275c1268302774e8ecac5fd32ff127, type: 3}
   m_Name: ThermosChaud
   m_EditorClassIdentifier: 
-  nameObject: Thermos
+  nameObject: Thermos chaud
   isDescribed: 1
   description: "Thermos rempli d'un liquide tr\xE8s chaud.\nC'est peut-\xEAtre du
     caf\xE9 ?"
@@ -23,3 +23,6 @@ MonoBehaviour:
   isBonGeste: 1
   bonGeste: "Il faut imm\xE9diatement passer la br\xFBlure \xE0 l'eau froide. Puis,
     ..."
+  inspecPos: {x: 0, y: 0, z: 0}
+  inspecScale: {x: 60, y: 60, z: 60}
+  inspecRot: {x: -90, y: 0, z: 0}

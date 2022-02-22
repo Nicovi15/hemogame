@@ -74,4 +74,5 @@ public class GameManager : MonoBehaviour
     {
         CFC.target = go.transform;
     }
+
 }

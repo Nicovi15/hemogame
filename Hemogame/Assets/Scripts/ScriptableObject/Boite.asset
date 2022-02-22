@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6275c1268302774e8ecac5fd32ff127, type: 3}
   m_Name: Boite
   m_EditorClassIdentifier: 
-  nameObject: "Bo\xEEte"
+  nameObject: Caisse en bois
   isDescribed: 0
   description: 
   valid: 1
@@ -20,4 +20,7 @@ MonoBehaviour:
   explication: "Cette bo\xEEte n'a pas de coins arrondis. Il est facile de se blesser
     en se cognant avec."
   isBonGeste: 0
-  bonGeste: Il faut appeler les pompiers au plus vite.
+  bonGeste: Il faut appeler les pompiers au plus vite ...
+  inspecPos: {x: 0, y: 0, z: 0}
+  inspecScale: {x: 1.3, y: 1.3, z: 1.3}
+  inspecRot: {x: 0, y: 0, z: 0}

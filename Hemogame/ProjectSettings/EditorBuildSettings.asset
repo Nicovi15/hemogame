@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Gymnase.unity
+    guid: ddb0d8d90dbfec64a8fbfbb13a8f88aa
   m_configObjects: {}
