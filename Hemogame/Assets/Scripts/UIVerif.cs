@@ -295,7 +295,10 @@ public class UIVerif : MonoBehaviour
         inspect.transform.position = inspect.transform.position  + currentObjet.getData().inspecPos;
         inspect.transform.localScale = currentObjet.getData().inspecScale;
         inspect.transform.parent = null;
-        inspect.layer = LayerMask.NameToLayer("Test");
+        if (inspect.GetComponent<PathFollower>())
+            inspect.GetComponent<PathFollower>().enabled = false;
+        //inspect.layer = LayerMask.NameToLayer("Test");
+        MoveToLayer(inspect.transform, LayerMask.NameToLayer("Test"));
         t.target = inspect;
         GM.setCFCtarget(currentObjet.gameObject);
 
@@ -333,5 +336,12 @@ public class UIVerif : MonoBehaviour
     {
         foreach (var b in backgrounds)
             b.color = c;
+    }
+
+    void MoveToLayer(Transform root, int layer)
+    {
+        root.gameObject.layer = layer;
+        foreach (Transform child in root)
+            MoveToLayer(child, layer);
     }
 }
