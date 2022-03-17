@@ -28,4 +28,9 @@ public class ObjectDescription : ScriptableObject
     public Vector3 inspecScale;
     public Vector3 inspecRot;
 
+    public Vector3 holdingPos;
+    public float holdingRadius;
+    public Vector3 holdingRot;
+    public Vector3 holdingScale;
+
 }

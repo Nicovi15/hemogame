@@ -36,7 +36,7 @@ public class CameraFollowCircle : MonoBehaviour
 
         float x = CCT.radius * Mathf.Cos(theta);
         float z = CCT.radius * Mathf.Sin(theta);
-        this.transform.position = CCT.center.position + new Vector3(x, CCT.center.position.y, z);
+        this.transform.position = CCT.center.position + new Vector3(x, CCT.transform.position.y, z);
 
         this.transform.LookAt(target);
     }

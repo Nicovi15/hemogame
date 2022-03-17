@@ -39,11 +39,14 @@ public class PanelObjet : MonoBehaviour
             coefY = 1;
         else
             coefY = -1;
+
+        adjustPos();
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         Vector2 mousePos = Input.mousePosition;
 
         float x = mousePos.x + coefX * xOffset;
@@ -60,7 +63,8 @@ public class PanelObjet : MonoBehaviour
         else if (y - rt.rect.height / 2 < 0)
             y = rt.rect.height / 2;
 
-        rt.position = new Vector3(x, y, 0);
+    */
+        adjustPos();
     }
 
     public void setData(ObjectDescription od)
@@ -73,9 +77,36 @@ public class PanelObjet : MonoBehaviour
 
     }
 
+    public void showOnlyName()
+    {
+        descriptionTM.gameObject.SetActive(false);
+        imageWarning.SetActive(false);
+    }
+
     public void setIsSelected(bool s)
     {
         isSelected = s;
         imageWarning.SetActive(isSelected);
+    }
+
+    void adjustPos()
+    {
+        Vector2 mousePos = Input.mousePosition;
+
+        float x = mousePos.x + coefX * xOffset;
+
+        float y = mousePos.y + coefY * yOffset;
+
+        if (x + rt.rect.width / 2 > Screen.width)
+            x = Screen.width - rt.rect.width / 2;
+        else if (x - rt.rect.width / 2 < 0)
+            x = rt.rect.width / 2;
+
+        if (y + rt.rect.height / 2 > Screen.height)
+            y = Screen.height - rt.rect.height / 2;
+        else if (y - rt.rect.height / 2 < 0)
+            y = rt.rect.height / 2;
+
+        rt.position = new Vector3(x, y, 0);
     }
 }
