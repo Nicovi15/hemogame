@@ -34,7 +34,8 @@ public class CircleCameraTrajectory : MonoBehaviour
         {
             float x = radius * Mathf.Cos(theta);
             float z = radius * Mathf.Sin(theta);
-            Vector3 pos = center.position + new Vector3(x, 0, z);
+            //Vector3 pos = center.position + new Vector3(x, 0, z);
+            Vector3 pos = new Vector3(x, 0, z);
             cercleRenderer.SetPosition(i, pos);
             theta += deltaTheta;
         }
