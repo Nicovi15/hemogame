@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PickObject
   layers:
   - Default
   - TransparentFX
@@ -14,9 +15,9 @@ TagManager:
   - Test
   - Ground
   - Pickable
-  - 
-  - 
-  - 
+  - Goal
+  - Trigger
+  - Interactable
   - 
   - 
   - 

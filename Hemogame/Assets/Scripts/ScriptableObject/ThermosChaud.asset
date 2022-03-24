@@ -28,5 +28,7 @@ MonoBehaviour:
   inspecRot: {x: -90, y: 0, z: 0}
   holdingPos: {x: 0, y: 0.1, z: 0.2}
   holdingRadius: 0.4
+  holdingRotPos: {x: 0, y: 0, z: 0}
+  dropPosZ: 0.4
   holdingRot: {x: 0, y: 0, z: 0}
   holdingScale: {x: 0, y: 0, z: 0}

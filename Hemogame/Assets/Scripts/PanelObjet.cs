@@ -77,6 +77,13 @@ public class PanelObjet : MonoBehaviour
 
     }
 
+    public void setMessage(string mes)
+    {
+        titreTM.text = mes;
+        descriptionTM.gameObject.SetActive(false);
+        imageWarning.SetActive(false);
+    }
+
     public void showOnlyName()
     {
         descriptionTM.gameObject.SetActive(false);

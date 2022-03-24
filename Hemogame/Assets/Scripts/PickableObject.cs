@@ -9,6 +9,8 @@ public class PickableObject : MonoBehaviour
     [SerializeField]
     Outline outline;
 
+    public bool isHolded;
+
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -44,19 +46,39 @@ public class PickableObject : MonoBehaviour
 
     public void pick()
     {
+        isHolded = true;
         transform.rotation = Quaternion.Euler(data.holdingRot);
+    }
+
+    public void unpick()
+    {
+        isHolded = false;
     }
 
     public float hold()
     {
-        transform.rotation = Quaternion.Euler(data.holdingRot);
+        
+        //transform.Rotate(data.holdingRotPos, Space.Self);
         transform.localPosition = data.holdingPos;
+        transform.localEulerAngles = data.holdingRotPos;
+        isHolded = true;
 
         return data.holdingRadius;
     }
     public void drop()
     {
+        isHolded = false;
         transform.rotation = Quaternion.Euler(data.holdingRot.x, transform.rotation.y, data.holdingRot.z);
 
+    }
+
+    public void poser()
+    {
+        isHolded = false;
+    }
+
+    public ObjectDescription getData()
+    {
+        return data;
     }
 }

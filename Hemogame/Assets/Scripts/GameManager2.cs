@@ -10,6 +10,12 @@ public class GameManager2 : MonoBehaviour
     [SerializeField]
     GameObject camGlobal;
 
+    [SerializeField]
+    public PickObjects PO;
+
+    [SerializeField]
+    public Transform rightHand;
+
     public bool fpController;
 
 

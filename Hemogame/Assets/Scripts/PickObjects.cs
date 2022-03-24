@@ -12,6 +12,9 @@ public class PickObjects : MonoBehaviour
     LayerMask pickMask;
 
     [SerializeField]
+    LayerMask interMask;
+
+    [SerializeField]
     LayerMask ignoreRayMask;
 
     [SerializeField]
@@ -23,7 +26,7 @@ public class PickObjects : MonoBehaviour
     Ray ray;
     RaycastHit hit;
 
-    GameObject pickedObject;
+    public GameObject pickedObject;
     Rigidbody pickedObjectBody;
     float initialMass;
     int initialLayer;
@@ -89,26 +92,30 @@ public class PickObjects : MonoBehaviour
         if (!pickedObject)
         {
             ray = cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit))
+            
+            //if (Physics.Raycast(ray, out hit))
+            if(Physics.Raycast(ray, out hit, 9000, allWithoutIgnore))
             {
                 if (pickMask == (pickMask | (1 << hit.collider.gameObject.layer)))
                 {
-                    Debug.Log(hit.collider.name);
+                    
                     if (objectOver == null)
                     {
                         objectOver = hit.collider.gameObject;
                         objectOver.GetComponent<PickableObject>().hover();
-                        panel = Instantiate(prefabPanel, canvas);
+                        if (!panel)
+                            panel = Instantiate(prefabPanel, canvas);
                         panel.SendMessage("setData", objectOver.GetComponent<PickableObject>().data);
                         panel.SendMessage("showOnlyName");
                     }
                     else if (objectOver != hit.collider.gameObject)
                     {
-                        Destroy(panel);
+                        //Destroy(panel);
                         objectOver.GetComponent<PickableObject>().unhover();
                         objectOver = hit.collider.gameObject;
                         objectOver.GetComponent<PickableObject>().hover();
-                        panel = Instantiate(prefabPanel, canvas);
+                        if (!panel)
+                            panel = Instantiate(prefabPanel, canvas);
                         panel.SendMessage("setData", objectOver.GetComponent<PickableObject>().data);
                         panel.SendMessage("showOnlyName");
                     }
@@ -147,9 +154,34 @@ public class PickObjects : MonoBehaviour
                     objectOver = null;
                     Destroy(panel);
                 }
-                    
+                else if (interMask == (interMask | (1 << hit.collider.gameObject.layer)))
+                {
+                    if (!panel)
+                        panel = Instantiate(prefabPanel, canvas);
+                    panel.SendMessage("setMessage", hit.collider.GetComponent<Interactable>().getDesc());
+
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        hit.collider.GetComponent<Interactable>().interact();
+                    }
+                }
+                /*
+                else
+                    Destroy(panel);
+                */
             }
-        }
+            else
+            {
+                if (objectOver)
+                {
+                    objectOver.GetComponent<PickableObject>().unhover();
+                    objectOver = null;
+                }
+                Destroy(panel);
+            }
+                
+
+            }
         else
         {
             Destroy(panel);
@@ -181,8 +213,10 @@ public class PickObjects : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0))
             {
+                pickedObject.GetComponent<PickableObject>().unpick();
                 pickedObjectBody.mass = initialMass;
                 pickedObject.layer = initialLayer;
+                pickedObjectBody.isKinematic = false;
                 pickedObjectBody.constraints = RigidbodyConstraints.None;
                 pickedObjectBody.useGravity = true;
                 pickedObjectBody.collisionDetectionMode = CollisionDetectionMode.Discrete;

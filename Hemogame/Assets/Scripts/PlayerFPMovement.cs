@@ -92,6 +92,18 @@ public class PlayerFPMovement : MonoBehaviour
     public float maxAmount;
     public float smoothAmount;
 
+    public float cdPickUpMax = 0.1f;
+    float cdPickUp;
+
+    [SerializeField]
+    LayerMask goalMask;
+
+    [SerializeField]
+    LayerMask triggerMask;
+
+    [SerializeField]
+    LayerMask interMask;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,11 +111,15 @@ public class PlayerFPMovement : MonoBehaviour
         hudText.text = "";
         initialLHPos = leftHand.localPosition;
         initialRHPos = rightHand.localPosition;
+
+        cdPickUp = cdPickUpMax;
     }
 
     // Update is called once per frame
     void Update()
     {
+        cdPickUp -= Time.deltaTime;
+
         #region Movement
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDist, groundMask);
@@ -143,6 +159,65 @@ public class PlayerFPMovement : MonoBehaviour
 
         #endregion
 
+        Ray testGoal = new Ray(cameraPlayer.transform.position, cameraPlayer.transform.forward);
+        if (Physics.Raycast(testGoal, out RaycastHit hitInfos2, pickUpRange, goalMask))
+        {
+            //hudText.text = hitInfos2.collider.GetComponent<GoalObjectif>().getActionDesc();
+
+            if (hitInfos2.collider.GetComponent<GoalObjectif>().MR.enabled && Input.GetKeyDown(KeyCode.E))
+            {
+                if (pickedObjectBody)
+                {
+                    Vector3 pos = this.transform.position;
+                    //pickedObjectBody.transform.position = hitInfos2.collider.transform.position;
+                    //Debug.Log("Objet placer");
+                    //GameObject o = pickedObjectBody.gameObject;
+                    //dropObject();
+                    hitInfos2.collider.GetComponent<GoalObjectif>().placerObjectif(pickedObjectBody.gameObject);
+                    poserObject();
+                    //hitInfos2.collider.GetComponent<GoalObjectif>().placerObjectif(o);
+                    controller.radius = regularRadius;
+                    controller.Move(this.transform.position - pos);
+                }
+            }
+        }
+        else if (!hoverObject)
+            hudText.text = "";
+
+        Ray testTrigger = new Ray(cameraPlayer.transform.position, cameraPlayer.transform.forward);
+        if (Physics.Raycast(testTrigger, out RaycastHit hitInfos3, pickUpRange+1.5f, triggerMask))
+        {
+
+            //hudText.text = hitInfos3.collider.GetComponent<TriggerObjectif>().getActionDesc();
+
+            if (hitInfos3.collider.GetComponent<TriggerObjectif>().MR.enabled && Input.GetKeyDown(KeyCode.E))
+            {
+                if (pickedObjectBody)
+                {
+                    GameObject o = pickedObjectBody.gameObject;
+                    poserObject();
+                    hitInfos3.collider.GetComponent<TriggerObjectif>().triggerObj(o);
+                    controller.radius = regularRadius;
+                }
+            }
+        }
+        else if(!hoverObject)
+            hudText.text = "";
+
+        Ray testInter = new Ray(cameraPlayer.transform.position, cameraPlayer.transform.forward);
+        if (Physics.Raycast(testInter, out RaycastHit hitInfos4, pickUpRange, interMask))
+        {
+
+            hudText.text = hitInfos4.collider.GetComponent<Interactable>().getDesc();
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                hitInfos4.collider.GetComponent<Interactable>().interact();
+            }
+        }
+        else if (!hoverObject)
+            hudText.text = "";
+
 
         #region PickUp Objects
 
@@ -181,30 +256,39 @@ public class PlayerFPMovement : MonoBehaviour
             {
                 dropObject();
             }
-            else if(Physics.Raycast(testPickUp, out RaycastHit hitInfo, pickUpRange, pickUpMask))
+            else if(cdPickUp < 0 && Physics.Raycast(testPickUp, out RaycastHit hitInfo, pickUpRange, pickUpMask))
             {
                 {
-                    controller.radius = holdingRadius;
-                    //controller.center = new Vector3(0, holdintHeight, 0);
-
-                    pickedObjectBody = hitInfo.rigidbody;
-                    pickedObjectCollider = hitInfo.collider;
-
-                    pickedObjectBody.isKinematic = true;
-                    pickedObjectCollider.enabled = false;
-
-                    pickedObjectBody.transform.SetParent(rightHand);
-                    pickedObjectBody.transform.localPosition = Vector3.zero;
-
-                    controller.radius = pickedObjectBody.GetComponent<PickableObject>().hold();
-                    dropPos.localPosition = new Vector3(0, 0.5f, controller.radius);
-                    pickedObjectBody.transform.rotation = new Quaternion();
+                    pickObject(hitInfo);
                 }
             }
 
         }
 
         #endregion
+
+       
+
+    }
+
+    private void pickObject(RaycastHit hitInfo)
+    {
+        controller.radius = holdingRadius;
+        //controller.center = new Vector3(0, holdintHeight, 0);
+
+        pickedObjectBody = hitInfo.rigidbody;
+        pickedObjectCollider = hitInfo.collider;
+
+        pickedObjectBody.isKinematic = true;
+        //pickedObjectCollider.enabled = false;
+
+        pickedObjectBody.transform.SetParent(rightHand);
+        pickedObjectBody.transform.localPosition = Vector3.zero;
+
+        controller.radius = pickedObjectBody.GetComponent<PickableObject>().hold();
+        ObjectDescription data = pickedObjectBody.GetComponent<PickableObject>().getData();
+        dropPos.localPosition = new Vector3(0, 0.5f, data.dropPosZ);
+        //pickedObjectBody.transform.rotation = new Quaternion();
     }
 
     private void dropObject()
@@ -229,6 +313,19 @@ public class PlayerFPMovement : MonoBehaviour
 
         pickedObjectBody = null;
         pickedObjectCollider = null;
+
+        cdPickUp = cdPickUpMax;
+    }
+
+    private void poserObject()
+    {
+        pickedObjectBody.transform.SetParent(null);
+        pickedObjectBody.GetComponent<PickableObject>().poser();
+        pickedObjectBody = null;
+        pickedObjectCollider = null;
+
+        cdPickUp = cdPickUpMax;
+
     }
 
     private void OnDisable()

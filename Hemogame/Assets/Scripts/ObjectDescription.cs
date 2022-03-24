@@ -7,6 +7,8 @@ public class ObjectDescription : ScriptableObject
 {
     public string nameObject;
 
+    public string categorie;
+
     public bool isDescribed;
 
     [TextArea(0, 3)]
@@ -30,6 +32,8 @@ public class ObjectDescription : ScriptableObject
 
     public Vector3 holdingPos;
     public float holdingRadius;
+    public Vector3 holdingRotPos;
+    public float dropPosZ;
     public Vector3 holdingRot;
     public Vector3 holdingScale;
 
