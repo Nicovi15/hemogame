@@ -321,9 +321,9 @@ public class PlayerFPMovement : MonoBehaviour
     {
         pickedObjectBody.transform.SetParent(null);
         pickedObjectBody.GetComponent<PickableObject>().poser();
+        pickedObjectCollider.enabled = false;
         pickedObjectBody = null;
         pickedObjectCollider = null;
-
         cdPickUp = cdPickUpMax;
 
     }

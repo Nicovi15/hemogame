@@ -41,6 +41,17 @@ public class GameManager2 : MonoBehaviour
         camGlobal.SetActive(!fpController);
     }
 
+    public void interruptToInteract()
+    {
+        playerFP.SetActive(false);
+        camGlobal.SetActive(false);
+    }
+
+    public void resume()
+    {
+        playerFP.SetActive(fpController);
+        camGlobal.SetActive(!fpController);
+    }
 
 
 

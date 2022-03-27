@@ -23,6 +23,8 @@ public class ObjectifNotIn : Objectif
         if (other.CompareTag("PickObject") && other.GetComponent<PickableObject>().data.valid)
         {
             objDangereux.Add(other.gameObject);
+
+            updateDone();
         }
     }
 
@@ -31,6 +33,8 @@ public class ObjectifNotIn : Objectif
         if (other.CompareTag("PickObject") && other.GetComponent<PickableObject>().data.valid)
         {
             objDangereux.Remove(other.gameObject);
+
+            updateDone();
         }
     }
 

@@ -21,8 +21,8 @@ MonoBehaviour:
   explication: 
   isBonGeste: 0
   bonGeste: 
-  inspecPos: {x: 0, y: 0, z: 0}
-  inspecScale: {x: 0, y: 0, z: 0}
+  inspecPos: {x: 0, y: 0, z: -1.8}
+  inspecScale: {x: 25, y: 25, z: 25}
   inspecRot: {x: 0, y: 0, z: 0}
   holdingPos: {x: 0.05, y: 0, z: 0.1}
   holdingRadius: 0.6

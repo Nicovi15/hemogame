@@ -31,7 +31,7 @@ public class testS : MonoBehaviour
 
     public void eyah()
     {
-        Debug.Log("yeah");
+
     }
 
     public void pointerDown()
