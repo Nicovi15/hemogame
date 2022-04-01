@@ -35,14 +35,12 @@ public class ArmoireObjectif : Objectif
         selectedObject = go;
         if (feedBack)
         {
-            Debug.Log("ou");
-
             if (feedbackObj)
                 Destroy(feedbackObj);
 
             feedbackObj = Instantiate(go);
-            feedbackObj.transform.position = feedbackPos.position
-                ;
+            feedbackObj.transform.position = feedbackPos.position;
+            feedbackObj.transform.rotation = feedbackPos.rotation;
             if (feedbackObj.GetComponent<PickableObject>())
             {
                 feedbackObj.GetComponent<Rigidbody>().useGravity = false;

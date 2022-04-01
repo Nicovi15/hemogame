@@ -65,6 +65,7 @@ public class ArmoireBallon : Interactable
 
     public void stopInteract()
     {
+        camArmoire.SetActive(false);
         GM.resume();
     }
 

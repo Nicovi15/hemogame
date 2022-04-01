@@ -34,6 +34,9 @@ public class CameraFollowCircle : MonoBehaviour
 
     public float rotateSpeed = 1;
 
+    [SerializeField]
+    DialogueUI dialogueUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +49,11 @@ public class CameraFollowCircle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (dialogueUI.IsOpen)
+        {
+            return;
+        }
+
         if (!isMoving)
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
@@ -77,7 +85,6 @@ public class CameraFollowCircle : MonoBehaviour
 
 
                     //Vector3 t = (hitInfos.point - cam.transform.position);
-                    Debug.Log(t);
                 }
             }
 

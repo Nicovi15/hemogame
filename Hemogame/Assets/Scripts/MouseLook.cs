@@ -17,6 +17,9 @@ public class MouseLook : MonoBehaviour
 
     float xRotation = 0f;
 
+    [SerializeField]
+    DialogueUI dialogueUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,16 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (dialogueUI.IsOpen)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            return;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivityX * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivityY * Time.deltaTime;
 

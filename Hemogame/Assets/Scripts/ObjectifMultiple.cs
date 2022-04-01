@@ -19,7 +19,7 @@ public class ObjectifMultiple : Objectif
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(toString());
+        //Debug.Log(toString());
     }
 
     public void updateObj()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager2 : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class GameManager2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.C))
+        if (Input.GetKeyUp(KeyCode.C) && (playerFP.activeSelf || camGlobal.activeSelf))
             switchPlayerMode();
     }
 
@@ -53,6 +54,11 @@ public class GameManager2 : MonoBehaviour
         camGlobal.SetActive(!fpController);
     }
 
+
+    public void switchScene(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
 
 
 }

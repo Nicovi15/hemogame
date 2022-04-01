@@ -81,7 +81,12 @@ public class TriggerObjectif : Objectif
     {
         if (!estOccupe && other.CompareTag("PickObject") && !other.GetComponent<PickableObject>().isHolded && (other.GetComponent<PickableObject>().data.categorie == categorie || other.GetComponent<PickableObject>().data == goalData))
         {
-            Debug.Log(other.name);
+            if (other.GetComponent<TriggerKey>())
+                if (other.GetComponent<TriggerKey>().isAlreadyUsed)
+                    return;
+                else
+                    other.GetComponent<TriggerKey>().isAlreadyUsed = true;
+            //Debug.Log(other.name);
             triggerObj(other.gameObject);
         }
     }

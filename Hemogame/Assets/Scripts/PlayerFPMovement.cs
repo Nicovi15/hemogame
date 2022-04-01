@@ -104,6 +104,16 @@ public class PlayerFPMovement : MonoBehaviour
     [SerializeField]
     LayerMask interMask;
 
+    [SerializeField]
+    LayerMask characterMask;
+
+    [SerializeField]
+    DialogueUI dialogueUI;
+
+    public DialogueUI DialogueUI => dialogueUI;
+
+    //public IInteractable Interactable { get; set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -118,6 +128,13 @@ public class PlayerFPMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (DialogueUI.IsOpen)
+        {
+            hudText.text = "";
+            return;
+        }
+            
+
         cdPickUp -= Time.deltaTime;
 
         #region Movement
@@ -213,6 +230,20 @@ public class PlayerFPMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 hitInfos4.collider.GetComponent<Interactable>().interact();
+            }
+        }
+        else if (!hoverObject)
+            hudText.text = "";
+
+        Ray testCharacter = new Ray(cameraPlayer.transform.position, cameraPlayer.transform.forward);
+        if (Physics.Raycast(testCharacter, out RaycastHit hitInfos5, pickUpRange, characterMask))
+        {
+
+            hudText.text = "Parler";
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                hitInfos5.collider.GetComponent<IInteractable>().Interact(this);
             }
         }
         else if (!hoverObject)

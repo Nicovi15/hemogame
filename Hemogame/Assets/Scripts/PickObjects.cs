@@ -15,6 +15,9 @@ public class PickObjects : MonoBehaviour
     LayerMask interMask;
 
     [SerializeField]
+    LayerMask characterMask;
+
+    [SerializeField]
     LayerMask ignoreRayMask;
 
     [SerializeField]
@@ -73,6 +76,11 @@ public class PickObjects : MonoBehaviour
 
     public Transform canvas;
 
+    [SerializeField]
+    DialogueUI dialogueUI;
+
+    public DialogueUI DialogueUI => dialogueUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -83,12 +91,20 @@ public class PickObjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (DialogueUI.IsOpen)
+        {
+            if(panel)
+                Destroy(panel);
+            return;
+        }
+            
+
         //ray = cam.ScreenPointToRay(Input.mousePosition);
         //Physics.Raycast(ray, out hit);
 
         //Debug.Log(hit.point);
         //Debug.Log(cam.ScreenToWorldPoint(Input.mousePosition));
-        
+
         if (!pickedObject)
         {
             ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -165,6 +181,17 @@ public class PickObjects : MonoBehaviour
                         hit.collider.GetComponent<Interactable>().interact();
                     }
                 }
+                else if (characterMask == (characterMask | (1 << hit.collider.gameObject.layer)))
+                {
+                    if (!panel)
+                        panel = Instantiate(prefabPanel, canvas);
+                    panel.SendMessage("setMessage", "Parler");
+
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        hit.collider.GetComponent<IInteractable>().Interact(this);
+                    }
+                }
                 /*
                 else
                     Destroy(panel);
@@ -187,7 +214,7 @@ public class PickObjects : MonoBehaviour
             Destroy(panel);
             ray = cam.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit, 10000, ~ignoreRayMask);
-            Debug.Log(hit.collider.name);
+            //Debug.Log(hit.collider.name);
             pickedObjectBody.velocity = Vector3.zero;
             pickedObjectBody.angularVelocity = Vector3.zero;
             //pickedObject.transform.position = hit.point + offSet;
