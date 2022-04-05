@@ -79,11 +79,16 @@ public class PickObjects : MonoBehaviour
     [SerializeField]
     DialogueUI dialogueUI;
 
+    public GameObject cursor;
+
+    cursorFollow CF;
+
     public DialogueUI DialogueUI => dialogueUI;
 
     // Start is called before the first frame update
     void Start()
     {
+        CF = cursor.GetComponent<cursorFollow>();
         target.SetActive(false);
         speed = lowSpeed;
     }
@@ -93,12 +98,15 @@ public class PickObjects : MonoBehaviour
     {
         if (DialogueUI.IsOpen)
         {
+            cursor.SetActive(false);
+
             if(panel)
                 Destroy(panel);
             return;
         }
             
-
+        if(!cursor.activeSelf)
+            cursor.SetActive(true);
         //ray = cam.ScreenPointToRay(Input.mousePosition);
         //Physics.Raycast(ray, out hit);
 
@@ -123,6 +131,7 @@ public class PickObjects : MonoBehaviour
                             panel = Instantiate(prefabPanel, canvas);
                         panel.SendMessage("setData", objectOver.GetComponent<PickableObject>().data);
                         panel.SendMessage("showOnlyName");
+                        CF.setPrendre();
                     }
                     else if (objectOver != hit.collider.gameObject)
                     {
@@ -134,6 +143,7 @@ public class PickObjects : MonoBehaviour
                             panel = Instantiate(prefabPanel, canvas);
                         panel.SendMessage("setData", objectOver.GetComponent<PickableObject>().data);
                         panel.SendMessage("showOnlyName");
+                        CF.setPrendre();
                     }
 
                     hit.collider.gameObject.GetComponent<PickableObject>().mouseOver();
@@ -161,6 +171,7 @@ public class PickObjects : MonoBehaviour
                         target.transform.localScale = new Vector3(Mathf.Max(bc.bounds.size.x * scaleTargetInit.x * coefScale, 0.25f), scaleTargetInit.y, Mathf.Max(bc.bounds.size.z * scaleTargetInit.z * coefScale, 0.25f));
                         //mZCoord = cam.WorldToScreenPoint(pickedObject.transform.position).z;
                         //mOffset = pickedObject.transform.position - getMouseWorldPos();
+                        CF.hide();
                     }
                         
                 }
@@ -169,12 +180,14 @@ public class PickObjects : MonoBehaviour
                     objectOver.GetComponent<PickableObject>().unhover();
                     objectOver = null;
                     Destroy(panel);
+                    CF.setNormal();
                 }
                 else if (interMask == (interMask | (1 << hit.collider.gameObject.layer)))
                 {
                     if (!panel)
                         panel = Instantiate(prefabPanel, canvas);
                     panel.SendMessage("setMessage", hit.collider.GetComponent<Interactable>().getDesc());
+                    CF.setInteract();
 
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -186,7 +199,7 @@ public class PickObjects : MonoBehaviour
                     if (!panel)
                         panel = Instantiate(prefabPanel, canvas);
                     panel.SendMessage("setMessage", "Parler");
-
+                    CF.setParler();
                     if (Input.GetMouseButtonDown(0))
                     {
                         hit.collider.GetComponent<IInteractable>().Interact(this);
@@ -205,6 +218,7 @@ public class PickObjects : MonoBehaviour
                     objectOver = null;
                 }
                 Destroy(panel);
+                CF.setNormal();
             }
                 
 
@@ -212,6 +226,7 @@ public class PickObjects : MonoBehaviour
         else
         {
             Destroy(panel);
+            CF.hide();
             ray = cam.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit, 10000, ~ignoreRayMask);
             //Debug.Log(hit.collider.name);
@@ -252,6 +267,7 @@ public class PickObjects : MonoBehaviour
                 pickedObjectBody = null;
 
                 target.SetActive(false);
+                CF.setNormal();
             }
         }
         

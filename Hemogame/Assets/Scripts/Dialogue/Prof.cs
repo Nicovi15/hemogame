@@ -106,7 +106,8 @@ public class Prof : MonoBehaviour, IInteractable
     IEnumerator waitThenSwitch(float t)
     {
         yield return new WaitForSeconds(t);
-        GM.switchScene(1);
+        //GM.switchScene(1);
+        GM.goToBallon();
     }
 
     public void lancerDebrief()

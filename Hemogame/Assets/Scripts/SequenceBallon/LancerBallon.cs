@@ -31,7 +31,7 @@ public class LancerBallon : MonoBehaviour
     void Start()
     {
         //StartCoroutine(defilementJauge());
-        spawnNewBallon();
+        //spawnNewBallon();
     }
 
     // Update is called once per frame

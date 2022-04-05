@@ -11,6 +11,9 @@ public class HUDPlayerGlobal : MonoBehaviour
     [SerializeField]
     ListeObjectif LO;
 
+    [SerializeField]
+    GameObject panelObj;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +24,10 @@ public class HUDPlayerGlobal : MonoBehaviour
     void Update()
     {
         text.text = LO.toString();
+    }
+
+    public void OnOffPanel()
+    {
+        panelObj.SetActive(!panelObj.activeSelf);
     }
 }

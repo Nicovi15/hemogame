@@ -19,6 +19,11 @@ public class GameManager2 : MonoBehaviour
 
     public bool fpController;
 
+    [SerializeField]
+    DialogueUI dialogueUI;
+
+    [SerializeField]
+    TransiMEP transi;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +36,11 @@ public class GameManager2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (dialogueUI.IsOpen || !transi.isOut)
+        {
+            return;
+        }
+
         if (Input.GetKeyUp(KeyCode.C) && (playerFP.activeSelf || camGlobal.activeSelf))
             switchPlayerMode();
     }
@@ -58,6 +68,12 @@ public class GameManager2 : MonoBehaviour
     public void switchScene(int index)
     {
         SceneManager.LoadScene(index);
+    }
+
+    public void goToBallon()
+    {
+        //transi.SetActive(true);
+        transi.GetComponent<TransiMEP>().triggerFermeture();
     }
 
 

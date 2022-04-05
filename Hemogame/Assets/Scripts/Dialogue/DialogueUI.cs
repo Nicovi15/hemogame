@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using System;
 
 public class DialogueUI : MonoBehaviour
 {
@@ -29,7 +29,7 @@ public class DialogueUI : MonoBehaviour
         twe = GetComponent<TypeWritterEffect>();
         responseHandler = GetComponent<ResponseHandler>();
         CloseDialogueBox();
-        showDialogue(testDialogue);
+        //showDialogue(testDialogue);
        
     }
 
@@ -38,6 +38,11 @@ public class DialogueUI : MonoBehaviour
         IsOpen = true;
         dialogueBox.SetActive(true);
         co = StartCoroutine(StepThroughDialogue(dob));
+    }
+
+    internal void startDialogue()
+    {
+        showDialogue(testDialogue);
     }
 
     public void AddResponseEvents(ResponseEvent[] responseEvents)

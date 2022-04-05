@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: PresentationObjectifs
   m_EditorClassIdentifier: 
   dialogue:
-  - "Aujourd\u2019hui nous allons faire de la gymnastique !\nJe vous laisse installer
-    le mat\xE9riel."
-  - Nous aurons besoin de tapis au sol, de cerceaux et de ballons.
-  - "Je vous laisse faire et n\u2019oubliez pas de ne rien laisser trainer !"
+  - "Bonjour \xE0 tous, j\u2019esp\xE8re que vous allez bien ! \nAujourd\u2019hui
+    nous allons faire de la gymnastique."
+  - "On va commencer par un \xE9chauffement avec du lancer de balle et des exercices
+    au cerceau puis on fera de la gym au sol."
+  - "Je vous laisse installer les tapis et sortir tout ce dont on aura besoin. Et
+    ne laissez rien tra\xEEner qui pourrait \xEAtre dangereux !"
   responses: []

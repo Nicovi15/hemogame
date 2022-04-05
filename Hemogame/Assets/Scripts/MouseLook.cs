@@ -20,6 +20,9 @@ public class MouseLook : MonoBehaviour
     [SerializeField]
     DialogueUI dialogueUI;
 
+    [SerializeField]
+    TransiMEP transi;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +32,7 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dialogueUI.IsOpen)
+        if (dialogueUI.IsOpen || !transi.isOut)
         {
             Cursor.lockState = CursorLockMode.None;
             return;

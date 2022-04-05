@@ -85,6 +85,15 @@ public class PlayerFPMovement : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI hudText;
 
+    [SerializeField]
+    GameObject hudParler;
+
+    [SerializeField]
+    GameObject hudPrendre;
+
+    [SerializeField]
+    GameObject hudInteract;
+
     Vector3 initialLHPos;
     Vector3 initialRHPos;
 
@@ -110,6 +119,11 @@ public class PlayerFPMovement : MonoBehaviour
     [SerializeField]
     DialogueUI dialogueUI;
 
+    [SerializeField]
+    TransiMEP transi;
+
+    public bool interact = false;
+
     public DialogueUI DialogueUI => dialogueUI;
 
     //public IInteractable Interactable { get; set; }
@@ -128,9 +142,11 @@ public class PlayerFPMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (DialogueUI.IsOpen)
+        if (DialogueUI.IsOpen || !transi.isOut)
         {
             hudText.text = "";
+            hudParler.SetActive(false);
+
             return;
         }
             
@@ -176,10 +192,13 @@ public class PlayerFPMovement : MonoBehaviour
 
         #endregion
 
+        interact = false;
+
         Ray testGoal = new Ray(cameraPlayer.transform.position, cameraPlayer.transform.forward);
         if (Physics.Raycast(testGoal, out RaycastHit hitInfos2, pickUpRange, goalMask))
         {
             //hudText.text = hitInfos2.collider.GetComponent<GoalObjectif>().getActionDesc();
+            //hudInteract.SetActive(true);
 
             if (hitInfos2.collider.GetComponent<GoalObjectif>().MR.enabled && Input.GetKeyDown(KeyCode.E))
             {
@@ -199,55 +218,90 @@ public class PlayerFPMovement : MonoBehaviour
             }
         }
         else if (!hoverObject)
+        {
             hudText.text = "";
+            //hudInteract.SetActive(false);
+        }
+            
 
         Ray testTrigger = new Ray(cameraPlayer.transform.position, cameraPlayer.transform.forward);
-        if (Physics.Raycast(testTrigger, out RaycastHit hitInfos3, pickUpRange+1.5f, triggerMask))
+        if (Physics.Raycast(testTrigger, out RaycastHit hitInfos3, pickUpRange + 1.5f, triggerMask))
         {
-
-            //hudText.text = hitInfos3.collider.GetComponent<TriggerObjectif>().getActionDesc();
-
-            if (hitInfos3.collider.GetComponent<TriggerObjectif>().MR.enabled && Input.GetKeyDown(KeyCode.E))
+            if (hitInfos3.collider.GetComponent<TriggerObjectif>().MR.enabled)
             {
-                if (pickedObjectBody)
+                hudInteract.SetActive(true);
+                hudText.text = hitInfos3.collider.GetComponent<TriggerObjectif>().getActionDesc();
+                interact = true;
+
+                if (Input.GetKeyDown(KeyCode.E))
                 {
-                    GameObject o = pickedObjectBody.gameObject;
-                    poserObject();
-                    hitInfos3.collider.GetComponent<TriggerObjectif>().triggerObj(o);
-                    controller.radius = regularRadius;
+                    if (pickedObjectBody)
+                    {
+                        GameObject o = pickedObjectBody.gameObject;
+                        poserObject();
+                        hitInfos3.collider.GetComponent<TriggerObjectif>().triggerObj(o);
+                        controller.radius = regularRadius;
+                    }
                 }
             }
+
         }
-        else if(!hoverObject)
+
+        /*
+        else if(!hoverObject && !interact)
+        {
             hudText.text = "";
+            hudInteract.SetActive(false);
+        }
+        */
 
         Ray testInter = new Ray(cameraPlayer.transform.position, cameraPlayer.transform.forward);
         if (Physics.Raycast(testInter, out RaycastHit hitInfos4, pickUpRange, interMask))
         {
-
+            hudInteract.SetActive(true);
             hudText.text = hitInfos4.collider.GetComponent<Interactable>().getDesc();
+            interact = true;
 
             if (Input.GetKeyDown(KeyCode.E))
             {
                 hitInfos4.collider.GetComponent<Interactable>().interact();
+                return;
+
             }
         }
-        else if (!hoverObject)
+
+        /*
+        else if(!hoverObject)
+        {
             hudText.text = "";
+            hudInteract.SetActive(false);
+        }
+        */
+
+        if (!interact)
+        {
+            hudInteract.SetActive(false);
+        }
 
         Ray testCharacter = new Ray(cameraPlayer.transform.position, cameraPlayer.transform.forward);
         if (Physics.Raycast(testCharacter, out RaycastHit hitInfos5, pickUpRange, characterMask))
         {
-
+            hudParler.SetActive(true);
             hudText.text = "Parler";
 
             if (Input.GetKeyDown(KeyCode.E))
             {
                 hitInfos5.collider.GetComponent<IInteractable>().Interact(this);
+                return;
             }
         }
-        else if (!hoverObject)
+        else if (!hoverObject && !interact)
+        {
+            hudParler.SetActive(false);
             hudText.text = "";
+        }
+            
+        //hudText.text = "";
 
 
         #region PickUp Objects
@@ -262,6 +316,7 @@ public class PlayerFPMovement : MonoBehaviour
                 hoverObjectScript = hoverObject.GetComponent<PickableObject>();
                 hoverObjectScript.hover();
                 hudText.text = "Prendre\n" + hoverObjectScript.data.nameObject;
+                hudPrendre.SetActive(true);
             }
             else if(hoverObject != hitInfos.collider.gameObject)
             {
@@ -270,10 +325,12 @@ public class PlayerFPMovement : MonoBehaviour
                 hoverObjectScript = hoverObject.GetComponent<PickableObject>();
                 hoverObjectScript.hover();
                 hudText.text = "Prendre\n" + hoverObjectScript.data.nameObject;
+                hudPrendre.SetActive(true);
             }
         }
         else if(hoverObject)
         {
+            hudPrendre.SetActive(false);
             hudText.text = "";
             hoverObjectScript.unhover();
             hoverObject = null;
@@ -393,4 +450,5 @@ public class PlayerFPMovement : MonoBehaviour
         Vector3 finalPos = new Vector3(movementX, movementY, 0);
         rightHand.localPosition = Vector3.Lerp(rightHand.localPosition, finalPos + initialRHPos, Time.deltaTime * smoothAmount);
     }
+
 }

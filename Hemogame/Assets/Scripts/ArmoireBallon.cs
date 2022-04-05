@@ -43,6 +43,7 @@ public class ArmoireBallon : Interactable
         anim.SetTrigger("Inter");
         camArmoire.SetActive(true);
         GM.interruptToInteract();
+        Cursor.visible = false;
     }
 
     public void openMenu()
@@ -61,6 +62,7 @@ public class ArmoireBallon : Interactable
         interactionObj.SetActive(false);
         I.clearInspect();
         anim.SetTrigger("Inter");
+        Cursor.visible = false;
     }
 
     public void stopInteract()
