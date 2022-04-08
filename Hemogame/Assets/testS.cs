@@ -19,7 +19,7 @@ public class testS : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isClicked)
+        if (target && isClicked)
         {
             Vector3 delta = Input.mousePosition - lastPosFrame;
             lastPosFrame = Input.mousePosition;

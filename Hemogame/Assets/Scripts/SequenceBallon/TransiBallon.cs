@@ -11,7 +11,7 @@ public class TransiBallon : MonoBehaviour
 
     public bool isOut;
 
-    bool transiDone = false;
+    //bool transiDone = false;
 
     void Start()
     {
@@ -58,7 +58,7 @@ public class TransiBallon : MonoBehaviour
 
     public void finFermeture()
     {
-        transiDone = true;
+        //transiDone = true;
     }
 
 

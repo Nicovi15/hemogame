@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Ballon : MonoBehaviour
 {
+    public float tropFaible;
+    public float tropFort;
+    public Receveur rec;
+
     Animator anim;
     public LancerBallon lb;
+
+    public ObjectDescription type;
 
     // Start is called before the first frame update
     void Start()
@@ -31,17 +37,20 @@ public class Ballon : MonoBehaviour
 
     public void finLancerFaible()
     {
-        StartCoroutine(tempFin());
+        if(rec.resultatTropFaible(this))
+            StartCoroutine(tempFin());
     }
 
     public void finLancerFort()
     {
-        StartCoroutine(tempFin());
+        if(rec.resultatTropFort(this))
+            StartCoroutine(tempFin());
     }
 
     public void finLancerNormal()
     {
-        StartCoroutine(tempFin());
+        if(rec.resultatNormal(this))
+            StartCoroutine(tempFin());
     }
 
     

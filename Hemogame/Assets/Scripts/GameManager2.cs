@@ -25,6 +25,17 @@ public class GameManager2 : MonoBehaviour
     [SerializeField]
     TransiMEP transi;
 
+
+    [SerializeField]
+    ArmoireObjectif armBallon;
+
+    [SerializeField]
+    ArmoireObjectif armCerceaux;
+
+    [SerializeField]
+    ChoixPlacement choixP;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +84,10 @@ public class GameManager2 : MonoBehaviour
     public void goToBallon()
     {
         //transi.SetActive(true);
+        choixP.ballonChoisi = armBallon.selectedObject.GetComponent<PickableObject>().data;
+
+        choixP.cerceauChoisi = armCerceaux.selectedObject.GetComponent<PickableObject>().data;
+
         transi.GetComponent<TransiMEP>().triggerFermeture();
     }
 

@@ -35199,6 +35199,9 @@ MonoBehaviour:
   fpController: 1
   dialogueUI: {fileID: 1726327010}
   transi: {fileID: 1197888979}
+  armBallon: {fileID: 644914294}
+  armCerceaux: {fileID: 216534823}
+  choixP: {fileID: 11400000, guid: b12e9fc469bde7642943013037fb1364, type: 2}
 --- !u!4 &1787812666
 Transform:
   m_ObjectHideFlags: 0
