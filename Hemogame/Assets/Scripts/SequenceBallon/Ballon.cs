@@ -43,8 +43,10 @@ public class Ballon : MonoBehaviour
 
     public void finLancerFort()
     {
-        if(rec.resultatTropFort(this))
+        if (rec.resultatTropFort(this))
             StartCoroutine(tempFin());
+        else
+            StartCoroutine(supprBallon());
     }
 
     public void finLancerNormal()
@@ -59,6 +61,13 @@ public class Ballon : MonoBehaviour
         anim.SetTrigger("fin");
         yield return new WaitForSeconds(0.5f);
         lb.spawnNewBallon();
+        Destroy(this.gameObject);
+    }
+
+    IEnumerator supprBallon()
+    {
+        anim.SetTrigger("fin");
+        yield return new WaitForSeconds(0.5f);
         Destroy(this.gameObject);
     }
 

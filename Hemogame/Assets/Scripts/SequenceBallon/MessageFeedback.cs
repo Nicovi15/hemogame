@@ -140,4 +140,10 @@ public class MessageFeedback : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public void setXpos(float newX)
+    {
+        RectTransform rt = dialogueBox.GetComponent<RectTransform>();
+        rt.anchoredPosition = new Vector2(newX, rt.anchoredPosition.y);
+    }
+
 }

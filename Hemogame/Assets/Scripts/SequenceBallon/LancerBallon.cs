@@ -44,6 +44,8 @@ public class LancerBallon : MonoBehaviour
 
     public bool enCours;
 
+    public bool termine = false;
+
     [SerializeField]
     Image barreEchauf;
 
@@ -52,6 +54,16 @@ public class LancerBallon : MonoBehaviour
 
     [SerializeField]
     GameManagerSequenceBallon GM;
+
+    [SerializeField]
+    Color jaugeFaible;
+
+    [SerializeField]
+    Color jaugeNormal;
+
+    [SerializeField]
+    Color jaugeFort;
+
 
     // Start is called before the first frame update
     void Start()
@@ -76,7 +88,14 @@ public class LancerBallon : MonoBehaviour
         */
 
         if (echauffement >= 100)
+        {
             enCours = false;
+            if(!termine)
+                GM.dialogFin();
+            termine = true;
+           
+        }
+            
 
         if (enCours)
             echauffement -= Time.deltaTime * vitesseEchauf;
@@ -105,6 +124,13 @@ public class LancerBallon : MonoBehaviour
                 dirJauge = -dirJauge;
 
             jauge.fillAmount = forceJauge / 100;
+
+            if (forceJauge < tropFaible)
+                jauge.color = jaugeFaible;
+            else if (forceJauge > tropFort)
+                jauge.color = jaugeFort;
+            else
+                jauge.color = jaugeNormal;
 
             yield return null;
         }
@@ -140,6 +166,10 @@ public class LancerBallon : MonoBehaviour
 
     public void spawnNewBallon()
     {
+        if (!enCours)
+            return;
+
+
         if (!isFirst)
             GM.avancerFile();
 
@@ -156,12 +186,36 @@ public class LancerBallon : MonoBehaviour
 
         bal.lb = this;
         bal.rec = currentReceveur;
-        tropFaible = bal.tropFaible;
-        tropFort = bal.tropFort;
+        //tropFaible = bal.tropFaible;
+        //tropFort = bal.tropFort;
     }
 
     public void addEchauf(float f)
     {
         echauffement += f;
+    }
+
+    public void setCurrentReceveur(Receveur r)
+    {
+        this.currentReceveur = r;
+        tropFaible = r.tropFaible;
+        tropFort = r.tropFort;
+
+        if (choixP.ballonChoisi == GM.mousseData)
+        {
+            tropFort += 15;
+            tropFaible += 3;
+        }
+        else if (choixP.ballonChoisi == GM.basketData)
+        {
+            tropFort -= 10;
+            tropFaible -= 3;
+        }
+        else if (choixP.ballonChoisi == GM.footData)
+        {
+            tropFort -= 5;
+            tropFaible += 5;
+        }
+
     }
 }

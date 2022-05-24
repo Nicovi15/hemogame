@@ -11,6 +11,9 @@ public class TransiBallon : MonoBehaviour
 
     public bool isOut;
 
+    [SerializeField]
+    GameManagerSequenceBallon GM;
+
     //bool transiDone = false;
 
     void Start()
@@ -45,7 +48,8 @@ public class TransiBallon : MonoBehaviour
     {
         //diag.startDialogue();
         //this.gameObject.SetActive(false);
-        lb.spawnNewBallon();
+        //lb.spawnNewBallon();
+        GM.dialogDebut();
     }
 
 
