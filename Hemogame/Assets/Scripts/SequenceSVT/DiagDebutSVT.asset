@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9364247ef81edb54eb9714c4ea1d0bfc, type: 3}
+  m_Name: DiagDebutSVT
+  m_EditorClassIdentifier: 
+  dialogue:
+  - "Bonjour \xE0 tous, aujourd\u2019hui nous allons faire la dissection d\u2019une
+    fleur puis nous observerons le pollen au microscope."
+  - "Je vais vous demander de vous mettre par deux pour manipuler s\u2019il vous
+    pla\xEEt."
+  responses: []

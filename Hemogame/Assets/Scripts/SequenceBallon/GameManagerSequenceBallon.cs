@@ -55,6 +55,9 @@ public class GameManagerSequenceBallon : MonoBehaviour
 
     public bool blesse = false;
 
+    [SerializeField]
+    GameObject saignement;
+
 
     // Start is called before the first frame update
     void Start()
@@ -81,6 +84,7 @@ public class GameManagerSequenceBallon : MonoBehaviour
                     r.maxFile--;
                     r.posFinFile += new Vector3( r.step, 0, 0);
                 }
+                cacherSaignement();
             }
             else if(toDo == "debuterBallon")
             {
@@ -90,6 +94,7 @@ public class GameManagerSequenceBallon : MonoBehaviour
             }
             else if(toDo == "fin")
             {
+
                 transi.triggerFermeture();
             }
 
@@ -180,6 +185,16 @@ public class GameManagerSequenceBallon : MonoBehaviour
 
 
         StartCoroutine(lancerJeu(3));
+    }
+
+    public void afficherSaignement()
+    {
+        saignement.SetActive(true);
+    }
+
+    public void cacherSaignement()
+    {
+        saignement.SetActive(false);
     }
 
 }

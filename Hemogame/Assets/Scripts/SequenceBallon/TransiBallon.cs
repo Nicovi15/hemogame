@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TransiBallon : MonoBehaviour
 {
@@ -63,6 +64,7 @@ public class TransiBallon : MonoBehaviour
     public void finFermeture()
     {
         //transiDone = true;
+        SceneManager.LoadScene(2);
     }
 
 

@@ -32,6 +32,11 @@ public class CamChoix : MonoBehaviour
         mf.showString(GM.currentReceveur.nom + messageNormal, "Ludovic", Color.magenta);
     }
 
+    public void afficherSang()
+    {
+        GM.afficherSaignement();
+    }
+
     public void afficherQuestion()
     {
         Question.SetActive(true);
@@ -40,5 +45,6 @@ public class CamChoix : MonoBehaviour
     public void retourBallon()
     {
         GM.retourSequenceBallon();
+        GM.cacherSaignement();
     }
 }

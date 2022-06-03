@@ -13,6 +13,9 @@ public class DialogueUI : MonoBehaviour
     TMP_Text textLabel;
 
     [SerializeField]
+    TMP_Text speakerLabel;
+
+    [SerializeField]
     DialogueObject testDialogue;
 
     ResponseHandler responseHandler;
@@ -100,6 +103,12 @@ public class DialogueUI : MonoBehaviour
         //IsOpen = true;
         //dialogueBox.SetActive(true);
         StopCoroutine(co);
+    }
+
+    public void setSpeaker(string nom, Color couleur)
+    {
+        speakerLabel.text = nom;
+        speakerLabel.color = couleur;
     }
 
 }
