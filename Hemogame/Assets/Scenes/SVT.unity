@@ -5684,11 +5684,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cours de SVT
-
-    - Etape 3 -
-
-    Travaux Pratiques'
+  m_text: "Cours de SVT\n- Etape 3 -\nTravaux Pratiques\nChoix du bin\xF4me"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1d06876e9fce0a04f9c45a3510ac1eb2, type: 2}
   m_sharedMaterial: {fileID: -1471718346052451468, guid: 1d06876e9fce0a04f9c45a3510ac1eb2, type: 2}
@@ -6391,6 +6387,8 @@ MonoBehaviour:
   diagFin: {fileID: 11400000, guid: cee93ddff7f446b4eb1bad92ff9d5da7, type: 2}
   couleurProf: {r: 0.65882355, g: 0.41960785, b: 1, a: 1}
   binome: 
+  transi: {fileID: 933116469}
+  currentBinome: {fileID: 11400000, guid: fa409777db0ed5e479a6159c8c83cde1, type: 2}
 --- !u!1 &1118575056
 GameObject:
   m_ObjectHideFlags: 0

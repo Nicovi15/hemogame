@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab9f8f6fa12cd5408791ef1f9143aff, type: 3}
+  m_Name: Julien
+  m_EditorClassIdentifier: 
+  nom: Julien
+  couleur: {r: 0.54901963, g: 0.32156864, b: 1, a: 1}
+  noteFleur1: {fileID: 6260329814028454423, guid: 30df5b825f61cd44184dcda5c603b49f, type: 3}
+  noteFleur2: {fileID: 4135538699159116570, guid: fdd3e431cdf02c940af3b9ec219c5a1e, type: 3}
+  noteFleur3: {fileID: 4423912368141167479, guid: 004b5391e6d6b1943839362c17dc3b09, type: 3}

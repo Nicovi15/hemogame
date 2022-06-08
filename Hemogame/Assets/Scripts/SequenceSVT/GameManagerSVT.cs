@@ -26,6 +26,13 @@ public class GameManagerSVT : MonoBehaviour
     public string binome;
 
     string toDo = "";
+
+    [SerializeField]
+    TransiSVT transi;
+
+    [SerializeField]
+    BinomeDissection currentBinome;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +55,8 @@ public class GameManagerSVT : MonoBehaviour
             }
             else if(toDo == "changerScene")
             {
-                SceneManager.LoadScene(3);
+                //SceneManager.LoadScene(3);
+                transi.triggerFermeture();
                 toDo = "";
             }
         }
@@ -72,6 +80,12 @@ public class GameManagerSVT : MonoBehaviour
         toDo = "changerScene";
         DI.setSpeaker("Professeur", couleurProf); 
         DI.showDialogue(diagFin);
+        BinomeDissection binomeChoisi = Resources.Load<BinomeDissection>("BinomeDissec/"+binome);
+        currentBinome.nom = binomeChoisi.nom;
+        currentBinome.couleur = binomeChoisi.couleur;
+        currentBinome.noteFleur1 = binomeChoisi.noteFleur1;
+        currentBinome.noteFleur2 = binomeChoisi.noteFleur2;
+        currentBinome.noteFleur3 = binomeChoisi.noteFleur3;
     }
 
 }

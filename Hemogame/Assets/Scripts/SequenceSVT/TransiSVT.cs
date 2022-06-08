@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TransiSVT : MonoBehaviour
 {
@@ -61,6 +62,6 @@ public class TransiSVT : MonoBehaviour
     public void finFermeture()
     {
         //transiDone = true;
-        //SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 }
