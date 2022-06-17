@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - PickObject
+  - Doigts
+  - CollisionDoigt
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Interactable
   - Character
   - Pin
-  - 
+  - Doigt
   - 
   - 
   - 

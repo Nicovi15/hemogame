@@ -47,6 +47,8 @@ public class Mouse : MonoBehaviour
     [SerializeField]
     SystemeDecoupe SD;
 
+    public float timeToReachTarget = 4f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -282,7 +284,7 @@ public class Mouse : MonoBehaviour
         endingPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
-    IEnumerator decoupe(Vector3 normal)
+    IEnumerator decoupe(Vector3 normal, bool auto = false)
     {
         yield return new WaitForSeconds(0.1f);
 
@@ -299,38 +301,52 @@ public class Mouse : MonoBehaviour
             Destroy(mc);
             yield break;
         }
+
+        SD.setCanChange(false);
             
 
         foreach (var x in gos)
         {
-            Vector3 transformedNormal = ((Vector3)(x.transform.localToWorldMatrix.transpose * normal)).normalized;
-            Vector3 transformedStartingPoint = new Vector3();
-
-            RaycastHit hit;
-            r = new Ray(startingPos, (endingPos - startingPos).normalized);
-            //Physics.Raycast(r, out hit, Mathf.Infinity)
-            //Physics.SphereCast(r, 1f, out hit, Mathf.Infinity)
-            if (Physics.Raycast(r, out hit, Mathf.Infinity))
+            if (x.CompareTag("Doigts"))
             {
-                transformedStartingPoint = x.transform.InverseTransformPoint(hit.point);
-                //Debug.Log("Did Hit " + hit.point);
-                enterPoint = transformedStartingPoint;
+                SD.doigtsCoupe.Add(x.GetComponent<DoigtsDissec>());
+            }
+            else if (x.CompareTag("CollisionDoigt"))
+            {
+                
+            }
+            else
+            {
+                Vector3 transformedNormal = ((Vector3)(x.transform.localToWorldMatrix.transpose * normal)).normalized;
+                Vector3 transformedStartingPoint = new Vector3();
+
+                RaycastHit hit;
+                r = new Ray(startingPos, (endingPos - startingPos).normalized);
+                //Physics.Raycast(r, out hit, Mathf.Infinity)
+                //Physics.SphereCast(r, 1f, out hit, Mathf.Infinity)
+                if (Physics.Raycast(r, out hit, Mathf.Infinity))
+                {
+                    transformedStartingPoint = x.transform.InverseTransformPoint(hit.point);
+                    //Debug.Log("Did Hit " + hit.point);
+                    enterPoint = transformedStartingPoint;
+                }
+
+                Plane plan = new Plane(transformedNormal, transformedStartingPoint);
+
+                GameObject[] test = Cutter2D.Cut(plan, x);
+                test[0].transform.SetParent(image.transform);
+                test[1].transform.SetParent(image.transform);
+
+                //test[0].transform.position += normal * distCut;
+                //test[1].transform.position -= normal * distCut;
+                if (test[0].GetComponent<MeshFilter>().mesh.triangles.Length == 0)
+                    Destroy(test[0]);
+                if (test[1].GetComponent<MeshFilter>().mesh.triangles.Length == 0)
+                    Destroy(test[1]);
+
+                Destroy(x);
             }
 
-            Plane plan = new Plane(transformedNormal, transformedStartingPoint);
-
-            GameObject[] test = Cutter2D.Cut(plan, x);
-            test[0].transform.SetParent(image.transform);
-            test[1].transform.SetParent(image.transform);
-
-            //test[0].transform.position += normal * distCut;
-            //test[1].transform.position -= normal * distCut;
-            if (test[0].GetComponent<MeshFilter>().mesh.triangles.Length == 0)
-                Destroy(test[0]);
-            if (test[1].GetComponent<MeshFilter>().mesh.triangles.Length == 0)
-                Destroy(test[1]);
-
-            Destroy(x);
         }
 
         gos.Clear();
@@ -386,14 +402,20 @@ public class Mouse : MonoBehaviour
             //child.position = new Vector3(child.position.x, image.transform.position.y, child.position.z);
         }
 
-
-        SD.proceedCoupe(p1.gameObject, p2.gameObject);
-        LR.positionCount = 0;
-        p1.unselect();
-        p2.unselect();
-        p1 = null;
-        p2 = null;
-        
+        if (auto)
+        {
+            LR.positionCount = 0;
+            StartCoroutine(SD.proceedCoupeAuto());
+        }
+        else
+        {
+            StartCoroutine(SD.proceedCoupe(p1.gameObject, p2.gameObject));
+            LR.positionCount = 0;
+            p1.unselect();
+            p2.unselect();
+            p1 = null;
+            p2 = null;
+        }
     }
 
     void DrawPlane(Vector3 position, Vector3 normal)
@@ -438,5 +460,122 @@ public class Mouse : MonoBehaviour
             gos.Add(other.gameObject);
     }
 
+
+    public void decoupeAuto(Vector3 startingPos, Vector3 endingPos)
+    {
+        this.startingPos = startingPos;
+        this.endingPos = endingPos;
+
+        //Creation du plan
+        //Vector3 side1 = cam.transform.position - startingPos;
+        //Vector3 side2 = cam.transform.position - endingPos;
+        Vector3 side1 = (startingPos + new Vector3(0, 1, 0)) - startingPos;
+        Vector3 side2 = (startingPos + new Vector3(0, 1, 0)) - endingPos;
+
+        Vector3 normal = Vector3.Cross(side1, side2).normalized;
+
+        //Vector3 transformedNormal = ((Vector3)(image.transform.localToWorldMatrix.transpose * normal)).normalized;
+        //
+        //Vector3 transformedStartingPoint = new Vector3();
+        //
+        //RaycastHit hit;
+        //r = new Ray(startingPos, (endingPos - startingPos).normalized);
+        //if (Physics.Raycast(r, out hit, Mathf.Infinity))
+        //{
+        //    transformedStartingPoint = image.transform.InverseTransformPoint(hit.point);
+        //    Debug.Log("Did Hit " + hit.point);
+        //    enterPoint = transformedStartingPoint;
+        //
+        //}
+        //
+        ////plan = new Plane(transformedNormal, transformedStartingPoint);
+        ////plan = new Plane(normal, startingPos);
+        ////plan = new Plane(transformedNormal, startingPos);
+
+        mc = this.gameObject.AddComponent<MeshCollider>();
+        Mesh mesh = new Mesh();
+        Vector3[] vertices = new Vector3[8];
+        int[] triangles = new int[12];
+
+        //vertices[0] = startingPos + new Vector3(0, 0, 0.5f) - new Vector3(0, 0.01f, 0);
+        //vertices[1] = startingPos - new Vector3(0, 0, 0.5f) - new Vector3(0, 0.01f, 0);
+        //vertices[2] = endingPos + new Vector3(0, 0, 0.5f) - new Vector3(0, 0.01f, 0);
+        //vertices[3] = endingPos - new Vector3(0, 0, 0.5f) - new Vector3(0, 0.01f, 0);
+        //
+        //vertices[4] = startingPos + new Vector3(0, 0, 0.5f) + new Vector3(0,0.01f, 0);
+        //vertices[5] = startingPos - new Vector3(0, 0, 0.5f) + new Vector3(0, 0.01f, 0); 
+        //vertices[6] = endingPos + new Vector3(0, 0, 0.5f) + new Vector3(0, 0.01f, 0); 
+        //vertices[7] = endingPos - new Vector3(0, 0, 0.5f) + new Vector3(0, 0.01f, 0); 
+
+        //vertices[0] = startingPos + new Vector3(0, 0.5f,0) - new Vector3(0, 0, largeurCoupe);
+        //vertices[1] = startingPos - new Vector3(0, 0.5f, 0) - new Vector3(0,  0, largeurCoupe);
+        //vertices[2] = endingPos + new Vector3(0, 0.5f, 0) - new Vector3(0,  0, largeurCoupe);
+        //vertices[3] = endingPos - new Vector3(0, 0.5f, 0) - new Vector3(0,  0, largeurCoupe);
+        //
+        //vertices[4] = startingPos + new Vector3(0, 0.5f, 0) + new Vector3(0,  0, largeurCoupe);
+        //vertices[5] = startingPos - new Vector3(0, 0.5f, 0) + new Vector3(0,  0, largeurCoupe);
+        //vertices[6] = endingPos + new Vector3(0, 0.5f, 0) + new Vector3(0, 0, largeurCoupe);
+        //vertices[7] = endingPos - new Vector3(0, 0.5f, 0) + new Vector3(0,  0, largeurCoupe);
+
+        vertices[0] = startingPos + (side1.normalized * largeurCoupe) - new Vector3(0, 0, largeurCoupe);
+        vertices[1] = startingPos - (side1.normalized * largeurCoupe) - new Vector3(0, 0, largeurCoupe);
+        vertices[2] = endingPos + (side1.normalized * largeurCoupe) - new Vector3(0, 0, largeurCoupe);
+        vertices[3] = endingPos - (side1.normalized * largeurCoupe) - new Vector3(0, 0, largeurCoupe);
+
+        vertices[4] = startingPos + (side1.normalized * largeurCoupe) + new Vector3(0, 0, largeurCoupe);
+        vertices[5] = startingPos - (side1.normalized * largeurCoupe) + new Vector3(0, 0, largeurCoupe);
+        vertices[6] = endingPos + (side1.normalized * largeurCoupe) + new Vector3(0, 0, largeurCoupe);
+        vertices[7] = endingPos - (side1.normalized * largeurCoupe) + new Vector3(0, 0, largeurCoupe);
+
+        triangles[0] = 0;
+        triangles[1] = 1;
+        triangles[2] = 2;
+        triangles[3] = 1;
+        triangles[4] = 3;
+        triangles[5] = 2;
+
+        triangles[6] = 6;
+        triangles[7] = 5;
+        triangles[8] = 4;
+        triangles[9] = 6;
+        triangles[10] = 7;
+        triangles[11] = 5;
+
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+
+
+        //LR.BakeMesh(mesh, true);
+        mc.sharedMesh = mesh;
+        mc.convex = true;
+        mc.isTrigger = true;
+
+        //GameObject[] cuts = Cutter2D.Cut(plan, image);
+        //Destroy(image);
+
+        StartCoroutine(decoupe(normal, true));
+    }
+
+    public IEnumerator traceAuto(Vector3 startingPos, Vector3 endingPos)
+    {
+        LR.positionCount = 1;
+        LR.SetPosition(0, startingPos + new Vector3(0, 0.01f, 0));
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.deltaTime / timeToReachTarget;
+            LR.positionCount = 2;
+            LR.SetPosition(0, startingPos + new Vector3(0, 0.01f, 0));
+            LR.SetPosition(1, Vector3.Lerp(startingPos, endingPos, t) + new Vector3(0, 0.01f, 0));
+            yield return null;
+        } 
+
+        LR.positionCount = 2;
+        LR.SetPosition(0, startingPos + new Vector3(0, 0.01f, 0));
+        LR.SetPosition(1, endingPos + new Vector3(0, 0.01f, 0));
+
+        decoupeAuto(startingPos, endingPos);
+        yield return null;
+    }
 
 }

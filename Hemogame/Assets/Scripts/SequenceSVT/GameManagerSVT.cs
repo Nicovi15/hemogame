@@ -86,6 +86,14 @@ public class GameManagerSVT : MonoBehaviour
         currentBinome.noteFleur1 = binomeChoisi.noteFleur1;
         currentBinome.noteFleur2 = binomeChoisi.noteFleur2;
         currentBinome.noteFleur3 = binomeChoisi.noteFleur3;
+
+        currentBinome.gainMorale = binomeChoisi.gainMorale;
+        currentBinome.perteMorale = binomeChoisi.perteMorale;
+        currentBinome.pertePhysique = binomeChoisi.pertePhysique;
+        currentBinome.gainPhysique = binomeChoisi.gainPhysique;
+
+        currentBinome.dialog1 = binomeChoisi.dialog1;
+        currentBinome.dialog2 = binomeChoisi.dialog2;
     }
 
 }

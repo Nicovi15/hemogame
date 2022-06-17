@@ -3744,7 +3744,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 4ad7091da1f525341af142d1e7ae4b16, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5c5eda9c761663c4499e23fa2b62a3cb, type: 2}
+      objectReference: {fileID: 2100000, guid: 439b5de7031f28b48a8962443f47321d, type: 2}
     - target: {fileID: 919132149155446097, guid: 4ad7091da1f525341af142d1e7ae4b16, type: 3}
       propertyPath: m_Name
       value: Tom
@@ -5874,6 +5874,8 @@ MonoBehaviour:
   jaugePhysique: {fileID: 690150390}
   jaugeMorale: {fileID: 228358084}
   vitesseJauge: 15
+  tomRender: {fileID: 1283346042}
+  tomColor: {r: 0.49411765, g: 0.8509804, b: 0.34117648, a: 1}
   modifMorale: 0
   modifPhysique: 0
 --- !u!114 &1077257311
@@ -7229,6 +7231,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1276178836}
   m_CullTransparentMesh: 1
+--- !u!23 &1283346042 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 4ad7091da1f525341af142d1e7ae4b16, type: 3}
+  m_PrefabInstance: {fileID: 639149974}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1292258726
 GameObject:
   m_ObjectHideFlags: 0

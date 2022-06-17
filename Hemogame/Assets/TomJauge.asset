@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf61fd3b54688d4ab1456d55e2e1c72, type: 3}
   m_Name: TomJauge
   m_EditorClassIdentifier: 
-  physique: 35
-  morale: 30
+  physique: 30
+  morale: 100

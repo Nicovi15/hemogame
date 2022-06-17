@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9364247ef81edb54eb9714c4ea1d0bfc, type: 3}
+  m_Name: DialogDebutDissec
+  m_EditorClassIdentifier: 
+  dialogue:
+  - "Pour la premi\xE8re fleur, je te laisse couper et je m'occupe de tenir la fleur."
+  - "Fais attention \xE0 mes doigts !"
+  responses: []

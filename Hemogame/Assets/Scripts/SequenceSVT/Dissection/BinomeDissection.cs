@@ -12,4 +12,12 @@ public class BinomeDissection : ScriptableObject
     public GameObject noteFleur2;
     public GameObject noteFleur3;
 
+    public int gainMorale;
+    public int perteMorale;
+
+    public int gainPhysique;
+    public int pertePhysique;
+
+    public DialogueObject dialog1;
+    public DialogueObject dialog2;
 }

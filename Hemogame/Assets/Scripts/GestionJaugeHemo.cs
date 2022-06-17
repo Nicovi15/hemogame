@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+//using UnityEngine.Rendering.PostProcessing;
 
 public class GestionJaugeHemo : MonoBehaviour
 {
@@ -20,16 +23,36 @@ public class GestionJaugeHemo : MonoBehaviour
     [SerializeField]
     float vitesseJauge;
 
+    [SerializeField]
+    MeshRenderer tomRender;
+
+    [SerializeField]
+    Color tomColor;
+
+    Volume globalVolume = null;
+    ColorAdjustments ca;
+
     public bool modifMorale = false;
     public bool modifPhysique = false;
+    //private 
+
+    private void Awake()
+    {
+        globalVolume = GameObject.Find("Global Volume").GetComponent<Volume>();
+        globalVolume.profile.TryGet(out ca);
+        updateVolume();
+        updateMat();
+        
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         //addPhysiqueGraph(25, 1, 0, 0);
         //addMoraleGraph(-25, 1, 0, 0);
-        jauges.physique = 50;
-        jauges.morale = 50;
+        //jauges.physique = 50;
+        //jauges.morale = 50;
+
     }
 
     // Update is called once per frame
@@ -38,17 +61,32 @@ public class GestionJaugeHemo : MonoBehaviour
         
     }
 
+    public void updateVolume()
+    {
+        ca.saturation.value = -80 + (160 * (((float)jauges.morale)/100f));
+    }
+
+    public void updateMat()
+    {
+        if (tomRender == null)
+            return;
+        Material m = tomRender.material;
+        m.SetColor("_BaseColor", new Color(tomColor.r, tomColor.g, tomColor.b, 0.5f + (0.5f * (((float)jauges.physique) / 100f))));
+    }
+
 
     public void addPhysique(int x)
     {
         jauges.physique += x;
         jauges.physique = Mathf.Clamp(jauges.physique, 0, 100);
+        updateMat();
     }
 
     public void addMorale(int x)
     {
         jauges.morale += x;
         jauges.morale = Mathf.Clamp(jauges.morale, 0, 100);
+        updateVolume();
     }
 
     public void addPhysiqueGraph(int x, float scale, float posX, float posY)
@@ -88,6 +126,8 @@ public class GestionJaugeHemo : MonoBehaviour
 
         if(!modifPhysique && !modifMorale)
             graphic.SetActive(false);
+
+        updateMat();
     }
 
 
@@ -128,6 +168,8 @@ public class GestionJaugeHemo : MonoBehaviour
 
         if (!modifPhysique && !modifMorale)
             graphic.SetActive(false);
+
+        updateVolume();
     }
 
 }

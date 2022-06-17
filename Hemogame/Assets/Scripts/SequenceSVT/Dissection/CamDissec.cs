@@ -7,6 +7,7 @@ public class CamDissec : MonoBehaviour
     public SystemeDecoupe SD;
     public GameObject UiDissec;
     public GameObject UiNote;
+    public GameObject UiPlace;
     public GameObject schemasTab;
 
     [SerializeField]
@@ -30,6 +31,7 @@ public class CamDissec : MonoBehaviour
     public void debutDissecToNote()
     {
         UiDissec.SetActive(false);
+        UiPlace.SetActive(false);
         SD.hideOutils();
     }
 
@@ -42,20 +44,27 @@ public class CamDissec : MonoBehaviour
     public void DebutNotetoDissec()
     {
         UiNote.SetActive(false);
-        SD.resetImage();
+        if (SD.isDissec)
+            SD.resetImage();
+        else
+            SD.resetPlace();
         SD.hideOutils();
     }
 
     public void finNoteToDissec()
     {
-        UiDissec.SetActive(true);
+        if (SD.isDissec)
+            UiDissec.SetActive(true);
+        else
+            UiPlace.SetActive(true);
         SD.showOutils();
     }
 
     public void finProfToDissec()
     {
-        UiDissec.SetActive(true);
-        SD.showOutils();
+        //UiDissec.SetActive(true);
+        //SD.showOutils();
+        SD.lancementDissec();
         schemasTab.SetActive(false);
     }
 

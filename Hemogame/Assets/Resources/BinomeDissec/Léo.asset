@@ -17,3 +17,7 @@ MonoBehaviour:
   noteFleur1: {fileID: 6260329814028454423, guid: d613dc71b7c2d054aa42d656303301d9, type: 3}
   noteFleur2: {fileID: 4135538699159116570, guid: 93e335d9575aaf9478a707d20d9ae9fd, type: 3}
   noteFleur3: {fileID: 4423912368141167479, guid: 1734f596ba6ebaf47a8a1ff380bf3d05, type: 3}
+  gainMorale: 6
+  perteMorale: -2
+  gainPhysique: 15
+  pertePhysique: -5

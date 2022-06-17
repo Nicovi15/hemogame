@@ -12,10 +12,19 @@ public class SystemeDecoupe : MonoBehaviour
     public CanvasDissection currentCanvas;
 
     [SerializeField]
+    public PlaceFleur currentPlace;
+
+    [SerializeField]
+    public PlaceFleur currentPlacePrefab;
+
+    [SerializeField]
     public GameObject currentImage;
 
     [SerializeField]
     public GameObject currentOutils;
+
+    [SerializeField]
+    public GameObject questionAccident;
 
     [SerializeField]
     Mouse mouse;
@@ -28,6 +37,9 @@ public class SystemeDecoupe : MonoBehaviour
 
     [SerializeField]
     TextMeshProUGUI titre;
+
+    [SerializeField]
+    TextMeshProUGUI titre2;
 
     [SerializeField]
     TextMeshProUGUI nbCoup;
@@ -50,6 +62,9 @@ public class SystemeDecoupe : MonoBehaviour
     [SerializeField]
     public List<CanvasDissection> CanvasPrefab;
 
+    [SerializeField]
+    public List<PlaceFleur> PlacePrefab;
+
     public DialogueUI DI;
 
     public DialogueObject dialogDebut;
@@ -57,6 +72,10 @@ public class SystemeDecoupe : MonoBehaviour
     public DialogueObject dialogMauvais;
     public DialogueObject dialogFin;
     public DialogueObject dialogFinProf;
+    public DialogueObject dialogCoupureBinome;
+    public DialogueObject dialogCoupureTom;
+    public DialogueObject dialogDebutDissec;
+    public DialogueObject dialogMidDissec;
     public Color couleurProf;
 
     public int index = 0;
@@ -66,13 +85,25 @@ public class SystemeDecoupe : MonoBehaviour
     public CamDissec cd;
 
     [SerializeField]
-    BinomeDissection currentBinome;
+    public BinomeDissection currentBinome;
 
     [SerializeField]
     TextMeshPro titreNote;
 
     [SerializeField]
     TransiDissec transi;
+
+    public List<DoigtsDissec> doigtsCoupe;
+
+    public GameObject hudDissec;
+    public GameObject hudDoigts;
+
+    public bool isDissec = true;
+
+    public bool continuer = false;
+
+    [SerializeField]
+    GestionJaugeHemo jauges;
 
     // Start is called before the first frame update
     void Start()
@@ -106,6 +137,26 @@ public class SystemeDecoupe : MonoBehaviour
             else if (toDo == "finProf")
             {
                 transi.triggerFermeture();
+            }
+            else if(toDo == "debutDissec")
+            {
+                hudDissec.SetActive(true);
+                showOutils();
+                setCanChange(true);
+            }
+            else if(toDo == "midDissec")
+            {
+                hudDissec.SetActive(false);
+                hideOutils();
+                Destroy(currentCanvas.gameObject);
+                index = 0;
+                hudDoigts.SetActive(true);
+                resetPlace();
+                isDissec = false;
+            }
+            else if(toDo == "nextPlace")
+            {
+                resetPlace();
             }
 
             toDo = "";
@@ -155,6 +206,45 @@ public class SystemeDecoupe : MonoBehaviour
         isFailed = false;
 
         if(currentNote != null)
+            Destroy(currentNote);
+        if (index == 0)
+            currentNote = Instantiate(currentBinome.noteFleur1);
+        else if (index == 1)
+            currentNote = Instantiate(currentBinome.noteFleur2);
+        else
+            currentNote = Instantiate(currentBinome.noteFleur3);
+
+        currentNote.transform.SetParent(emplacementNote.transform);
+        currentNote.transform.localPosition = new Vector3();
+        currentNote.transform.localRotation = new Quaternion();
+        currentNote.transform.localScale = new Vector3(1, 1, 1);
+        titreNote.text = "Notes de " + currentBinome.nom;
+
+    }
+
+    public void resetPlace()
+    {
+        if (currentPlace != null)
+            Destroy(currentPlace.gameObject);
+        currentPlace = Instantiate(currentPlacePrefab);
+        currentPlace.gameObject.SetActive(true);
+        currentImage = currentPlace.image;
+        mouse.image = currentImage;
+        mouse.canCoupe = true;
+        titre2.text = currentPlace.titre;
+
+        //currentOutils = null;
+        //
+        //if (outilsName == "ciseaux")
+        //    selectCiseaux();
+        //else if (outilsName == "pinces")
+        //    selectPinces();
+        //else if (outilsName == "scalpel")
+        //    selectScalpel();
+        //
+        //isFailed = false;
+
+        if (currentNote != null)
             Destroy(currentNote);
         if (index == 0)
             currentNote = Instantiate(currentBinome.noteFleur1);
@@ -224,18 +314,60 @@ public class SystemeDecoupe : MonoBehaviour
 
     public void hideOutils()
     {
-        currentOutils.SetActive(false);
+        if(currentOutils != null)
+            currentOutils.SetActive(false);
     }
 
     public void showOutils()
     {
-        currentOutils.SetActive(true);
+        if (currentOutils != null)
+            currentOutils.SetActive(true);
     }
 
-    public void proceedCoupe(GameObject pin1, GameObject pin2)
+    public IEnumerator proceedCoupe(GameObject pin1, GameObject pin2)
     {
         nbCoupe--;
         nbCoup.text = nbCoupe.ToString();
+
+        mouse.canCoupe = false;
+        hideOutils();
+
+        if (doigtsCoupe.Count > 0)
+        {
+            foreach(var d in doigtsCoupe)
+                d.afficheBlessure();
+
+            //jauges.addPhysique(currentBinome.pertePhysique);
+            jauges.addMorale(currentBinome.perteMorale);
+
+            DI.setSpeaker(currentBinome.nom, currentBinome.couleur);
+            DI.showDialogue(dialogCoupureBinome);
+
+            while (DI.IsOpen)
+                yield return null;
+
+            hudDissec.SetActive(false);
+
+            questionAccident.GetComponent<QuestionAccidentDissec>().isHemo = false;
+            questionAccident.GetComponent<QuestionAccidentDissec>().currentBinome = currentBinome;
+            questionAccident.SetActive(true);
+
+            while (DI.IsOpen || questionAccident.activeSelf)
+                yield return null;
+
+            hudDissec.SetActive(true);
+            foreach (var d in doigtsCoupe)
+                d.cacherBlessure();
+
+            doigtsCoupe.Clear();
+        }
+
+
+
+
+        mouse.canCoupe = true;
+        showOutils();
+
         if (nbCoupe <= 0)
         {
             mouse.canCoupe = false;
@@ -286,6 +418,7 @@ public class SystemeDecoupe : MonoBehaviour
             {
                 currentCanvas.achievement();
                 nextCanvas();
+                jauges.addMorale(currentBinome.gainMorale);
             }
         }
 
@@ -294,7 +427,11 @@ public class SystemeDecoupe : MonoBehaviour
             DI.setSpeaker(currentBinome.nom, currentBinome.couleur);
             DI.showDialogue(dialogMauvais);
             toDo = "reset";
+            jauges.addMorale(currentBinome.perteMorale);
         }
+
+        setCanChange(true);
+        yield return null;
 
         
     }
@@ -306,8 +443,32 @@ public class SystemeDecoupe : MonoBehaviour
         {
             currentCanvasPrefab = CanvasPrefab[index];
             DI.setSpeaker(currentBinome.nom, currentBinome.couleur);
+            //if (index == 1)
+            //    DI.showDialogue(currentBinome.dialog1);
+            //else
             DI.showDialogue(dialogBon);
             toDo = "next";
+        }
+        else
+        {
+            DI.setSpeaker(currentBinome.nom, currentBinome.couleur);
+            DI.showDialogue(dialogMidDissec);
+            toDo = "midDissec";
+        }
+    }
+
+    public void nextPlace()
+    {
+        index++;
+        if (index < PlacePrefab.Count)
+        {
+            currentPlacePrefab = PlacePrefab[index];
+            DI.setSpeaker(currentBinome.nom, currentBinome.couleur);
+            //if (index == 1)
+            //    DI.showDialogue(currentBinome.dialog2);
+            //else
+            DI.showDialogue(dialogBon);
+            toDo = "nextPlace";
         }
         else
         {
@@ -332,6 +493,103 @@ public class SystemeDecoupe : MonoBehaviour
         toDo = "finProf";
     }
 
+    public void setCanChange(bool b)
+    {
+        currentCanvas.canChange = b;
+    }
+
+    public void lancementDissec()
+    {
+        DI.setSpeaker(currentBinome.nom, currentBinome.couleur);
+        DI.showDialogue(dialogDebutDissec);
+        toDo = "debutDissec";
+        setCanChange(false);
+    }
+
+    public void validDoigts()
+    {
+        if (!currentPlace.canValide)
+            return;
+
+        Debug.Log("lancement coupe auto");
+        currentPlace.canMove = false;
+        StartCoroutine(coupeAuto());
+    }
+
+    public IEnumerator coupeAuto()
+    {
+        for(int i = 0; i < currentPlace.decoupes.Count; i++)
+        {
+            bonOutilsAuto(currentPlace.decoupesOutils[i]);
+
+            continuer = false;
+
+            GameObject p1 = currentPlace.decoupes[i].transform.GetChild(0).gameObject;
+            GameObject p2 = currentPlace.decoupes[i].transform.GetChild(1).gameObject;
+
+            //mouse.decoupeAuto(p1.transform.position, p2.transform.position);
+            StartCoroutine(mouse.traceAuto(p1.transform.position, p2.transform.position));
+
+            while(!continuer)
+                yield return null;
+        }
+
+        Debug.Log("next place");
+        nextPlace();
+        jauges.addMorale(currentBinome.gainMorale);
+
+        yield return null;
+    }
+
+    public IEnumerator proceedCoupeAuto()
+    {
+        if (doigtsCoupe.Count > 0)
+        {
+            foreach (var d in doigtsCoupe)
+                d.afficheBlessure();
+
+            jauges.addPhysique(currentBinome.pertePhysique);
+
+            DI.setSpeaker(currentBinome.nom, currentBinome.couleur);
+            DI.showDialogue(dialogCoupureTom);
+
+            while (DI.IsOpen)
+                yield return null;
+
+            hudDoigts.SetActive(false);
+
+            questionAccident.GetComponent<QuestionAccidentDissec>().isHemo = true;
+            questionAccident.GetComponent<QuestionAccidentDissec>().currentBinome = currentBinome;
+            questionAccident.SetActive(true);
+
+            while (DI.IsOpen || questionAccident.activeSelf)
+                yield return null;
+
+            hudDoigts.SetActive(true);
+            foreach (var d in doigtsCoupe)
+                d.cacherBlessure();
+
+            doigtsCoupe.Clear();
+        }
+
+        continuer = true;
+
+    }
+
+    public void bonOutilsAuto(string outils)
+    {
+        ciseaux.SetActive(false);
+        scalpel.SetActive(false);
+        pinces.SetActive(false);
+
+        if (outils == "ciseaux")
+            ciseaux.SetActive(true);
+        else if (outils == "pinces")
+            pinces.SetActive(true);
+        else if (outils == "scalpel")
+            scalpel.SetActive(true);
+
+    }
 
 
 }
