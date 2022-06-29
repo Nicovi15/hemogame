@@ -59,6 +59,9 @@ public class Receveur : MonoBehaviour
     [SerializeField]
     public float tropFort;
 
+    [SerializeField]
+    public float PointBonnePasse;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -174,7 +177,7 @@ public class Receveur : MonoBehaviour
 
     public bool resultatNormal(Ballon bal)
     {
-        lb.addEchauf(6);
+        lb.addEchauf(PointBonnePasse);
         //lb.addEchauf(50);
         MessageFeedback mf = Instantiate(canvasMess).GetComponent<MessageFeedback>();
         mf.showString(messageNormal, nom, col);

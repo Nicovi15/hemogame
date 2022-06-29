@@ -27,6 +27,9 @@ public class GestionJaugeHemo : MonoBehaviour
     MeshRenderer tomRender;
 
     [SerializeField]
+    SkinnedMeshRenderer tomRender2;
+
+    [SerializeField]
     Color tomColor;
 
     Volume globalVolume = null;
@@ -68,9 +71,9 @@ public class GestionJaugeHemo : MonoBehaviour
 
     public void updateMat()
     {
-        if (tomRender == null)
+        if (tomRender == null && tomRender2 == null)
             return;
-        Material m = tomRender.material;
+        Material m = tomRender2 == null ? tomRender.material : tomRender2.material;
         m.SetColor("_BaseColor", new Color(tomColor.r, tomColor.g, tomColor.b, 0.5f + (0.5f * (((float)jauges.physique) / 100f))));
     }
 

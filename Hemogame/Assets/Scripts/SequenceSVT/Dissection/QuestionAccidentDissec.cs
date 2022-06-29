@@ -102,7 +102,7 @@ public class QuestionAccidentDissec : MonoBehaviour
     {
         DI.setSpeaker("Professeur", couleurProf);
         if (isHemo)
-            DI.showDialogue(brephemo);
+            DI.showDialogue(mrephemo);
         else
             DI.showDialogue(mrepnonhemo);
         gameObject.SetActive(false);
@@ -112,7 +112,7 @@ public class QuestionAccidentDissec : MonoBehaviour
     {
         DI.setSpeaker("Professeur", couleurProf);
         if (isHemo)
-            DI.showDialogue(mrephemo);
+            DI.showDialogue(brephemo);
         else
             DI.showDialogue(brepnonhemo);
         gameObject.SetActive(false);

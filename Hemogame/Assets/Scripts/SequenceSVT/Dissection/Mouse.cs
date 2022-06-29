@@ -49,10 +49,12 @@ public class Mouse : MonoBehaviour
 
     public float timeToReachTarget = 4f;
 
+    AudioSource AS;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        AS = GetComponent<AudioSource>();
         plan = new Plane();
         r = new Ray();
         enterPoint = new Vector3();
@@ -303,8 +305,8 @@ public class Mouse : MonoBehaviour
         }
 
         SD.setCanChange(false);
-            
 
+        AS.Play();
         foreach (var x in gos)
         {
             if (x.CompareTag("Doigts"))

@@ -62,7 +62,7 @@ public class TransiDissec : MonoBehaviour
     public void finFermeture()
     {
         //transiDone = true;
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
 
 }

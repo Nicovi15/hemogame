@@ -1636,6 +1636,7 @@ MonoBehaviour:
   jauges: {fileID: 0}
   tropFaible: 33
   tropFort: 75
+  PointBonnePasse: 12
 --- !u!95 &126504379
 Animator:
   serializedVersion: 4
@@ -2819,6 +2820,7 @@ MonoBehaviour:
   jauges: {fileID: 1168992638}
   tropFaible: 33
   tropFort: 75
+  PointBonnePasse: 0
 --- !u!95 &312448705
 Animator:
   serializedVersion: 4
@@ -4561,6 +4563,7 @@ MonoBehaviour:
   jauges: {fileID: 1168992638}
   tropFaible: 33
   tropFort: 75
+  PointBonnePasse: 12
 --- !u!23 &538710983 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 4ad7091da1f525341af142d1e7ae4b16, type: 3}
@@ -7248,11 +7251,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 00dec1d667936da41830824ca9b49f49, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1845
+      value: 1.15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 00dec1d667936da41830824ca9b49f49, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.0209
+      value: 1.0166
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 00dec1d667936da41830824ca9b49f49, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12125,6 +12128,7 @@ MonoBehaviour:
   jaugeMorale: {fileID: 1437536865}
   vitesseJauge: 15
   tomRender: {fileID: 538710983}
+  tomRender2: {fileID: 0}
   tomColor: {r: 0.49411765, g: 0.8509804, b: 0.34117648, a: 1}
   modifMorale: 0
   modifPhysique: 0
@@ -14502,6 +14506,7 @@ MonoBehaviour:
   jauges: {fileID: 0}
   tropFaible: 33
   tropFort: 75
+  PointBonnePasse: 12
 --- !u!95 &1354509802
 Animator:
   serializedVersion: 4
@@ -15611,6 +15616,7 @@ MonoBehaviour:
   jauges: {fileID: 0}
   tropFaible: 33
   tropFort: 75
+  PointBonnePasse: 12
 --- !u!95 &1420463531
 Animator:
   serializedVersion: 4
@@ -19387,6 +19393,7 @@ MonoBehaviour:
   jauges: {fileID: 0}
   tropFaible: 33
   tropFort: 75
+  PointBonnePasse: 12
 --- !u!95 &1707078254
 Animator:
   serializedVersion: 4
@@ -19820,9 +19827,9 @@ MonoBehaviour:
   textLabel: {fileID: 766143239}
   question: ' saigne du nez. Que faut-il faire ?'
   reponses: {fileID: 272731430}
-  brephemo: {fileID: 11400000, guid: 8d6b0fa52c9271243b27819f7fdbe093, type: 2}
+  brephemo: {fileID: 11400000, guid: 732307c7a60437d4ba51c3bc293b669d, type: 2}
   brepnonhemo: {fileID: 11400000, guid: 732307c7a60437d4ba51c3bc293b669d, type: 2}
-  mrephemo: {fileID: 11400000, guid: d6d6c56770ae37345a073ff54f699513, type: 2}
+  mrephemo: {fileID: 11400000, guid: 8dc9d2f6a56ee9d4ab5e992be3a43762, type: 2}
   mrepnonhemo: {fileID: 11400000, guid: 8dc9d2f6a56ee9d4ab5e992be3a43762, type: 2}
 --- !u!1 &1738458245
 GameObject:
@@ -23994,6 +24001,7 @@ MonoBehaviour:
   jauges: {fileID: 0}
   tropFaible: 33
   tropFort: 75
+  PointBonnePasse: 12
 --- !u!95 &2098096021
 Animator:
   serializedVersion: 4

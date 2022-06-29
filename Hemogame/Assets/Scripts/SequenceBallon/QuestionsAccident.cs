@@ -91,7 +91,7 @@ public class QuestionsAccident : MonoBehaviour
     public void reponse1()
     {
         if(GM.currentReceveur.isHemo)
-            GM.resultatChoix(brephemo);
+            GM.resultatChoix(mrephemo);
         else
             GM.resultatChoix(mrepnonhemo);
         gameObject.SetActive(false);
@@ -100,7 +100,7 @@ public class QuestionsAccident : MonoBehaviour
     public void reponse2()
     {
         if (GM.currentReceveur.isHemo)
-            GM.resultatChoix(mrephemo);
+            GM.resultatChoix(brephemo);
         else
             GM.resultatChoix(brepnonhemo);
         gameObject.SetActive(false);

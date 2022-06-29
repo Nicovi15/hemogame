@@ -2411,7 +2411,9 @@ MonoBehaviour:
   dialogCoupureTom: {fileID: 11400000, guid: 83738b037f23e1c41bf9f11581935064, type: 2}
   dialogDebutDissec: {fileID: 11400000, guid: 19ba5db7128964f41b1b5b0af08d1bb2, type: 2}
   dialogMidDissec: {fileID: 11400000, guid: 0c18622c22ce6d2428d3ec420ad5a3fd, type: 2}
+  dialogTomCoupeBinome: {fileID: 11400000, guid: 0fdc9a0a11b4538429430276ab2eca3c, type: 2}
   couleurProf: {r: 0.65882355, g: 0.41960785, b: 1, a: 1}
+  couleurTom: {r: 0.49411765, g: 0.8509804, b: 0.34117648, a: 1}
   index: 0
   cd: {fileID: 1195764333}
   currentBinome: {fileID: 11400000, guid: fa409777db0ed5e479a6159c8c83cde1, type: 2}
@@ -10543,9 +10545,9 @@ MonoBehaviour:
   question: " a son doigts bless\xE9. Que faut-il faire ?"
   DI: {fileID: 496813769}
   reponses: {fileID: 1268576469}
-  brephemo: {fileID: 11400000, guid: 8d6b0fa52c9271243b27819f7fdbe093, type: 2}
+  brephemo: {fileID: 11400000, guid: 732307c7a60437d4ba51c3bc293b669d, type: 2}
   brepnonhemo: {fileID: 11400000, guid: 732307c7a60437d4ba51c3bc293b669d, type: 2}
-  mrephemo: {fileID: 11400000, guid: d6d6c56770ae37345a073ff54f699513, type: 2}
+  mrephemo: {fileID: 11400000, guid: 8dc9d2f6a56ee9d4ab5e992be3a43762, type: 2}
   mrepnonhemo: {fileID: 11400000, guid: 8dc9d2f6a56ee9d4ab5e992be3a43762, type: 2}
   couleurProf: {r: 0.65882355, g: 0.41960785, b: 1, a: 1}
 --- !u!1 &1159230470
@@ -18979,6 +18981,7 @@ MonoBehaviour:
   jaugeMorale: {fileID: 1234672049}
   vitesseJauge: 15
   tomRender: {fileID: 0}
+  tomRender2: {fileID: 0}
   tomColor: {r: 0.49411765, g: 0.8509804, b: 0.34117648, a: 1}
   modifMorale: 0
   modifPhysique: 0
@@ -19093,6 +19096,7 @@ GameObject:
   - component: {fileID: 3630244670393742580}
   - component: {fileID: 3630244670393742582}
   - component: {fileID: 3630244670393742583}
+  - component: {fileID: 3630244670393742584}
   m_Layer: 0
   m_Name: Mouse
   m_TagString: Untagged
@@ -19297,3 +19301,99 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!82 &3630244670393742584
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3630244670393742569}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3c71b2c31d173d346a9a6954d0a1f31a, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

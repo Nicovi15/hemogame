@@ -2440,6 +2440,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: -5754084199372789682, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -3250445436631454502, guid: e21b30be8ad0e164eaf2189b02707d07, type: 3}
     - target: {fileID: 919132149155446097, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
       propertyPath: m_Name
       value: chasuble_plie (1)
@@ -4785,9 +4789,17 @@ PrefabInstance:
       value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 963f471f82224a645845aaaaf34de898, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -3250445436631454502, guid: e21b30be8ad0e164eaf2189b02707d07, type: 3}
     - target: {fileID: 919132149155446097, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
       propertyPath: m_Name
       value: chasuble_plie (1)
@@ -18541,9 +18553,17 @@ PrefabInstance:
       value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ea643f0ea5156004295a24cad79afcd1, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -3250445436631454502, guid: e21b30be8ad0e164eaf2189b02707d07, type: 3}
     - target: {fileID: 919132149155446097, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
       propertyPath: m_Name
       value: chasuble_plie (1)
@@ -21181,9 +21201,17 @@ PrefabInstance:
       value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 110a307d4abcc7c49910e02a72ec001b, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -3250445436631454502, guid: e21b30be8ad0e164eaf2189b02707d07, type: 3}
     - target: {fileID: 919132149155446097, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
       propertyPath: m_Name
       value: chasuble_plie (1)
@@ -36784,9 +36812,17 @@ PrefabInstance:
       value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1f945052870cdab44a587d95ecf231d8, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -3250445436631454502, guid: e21b30be8ad0e164eaf2189b02707d07, type: 3}
     - target: {fileID: 919132149155446097, guid: 35e5aeecd00405f4da252ec8f9303c36, type: 3}
       propertyPath: m_Name
       value: chasuble_plie (1)

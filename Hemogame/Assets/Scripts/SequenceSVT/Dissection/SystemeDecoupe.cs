@@ -76,7 +76,9 @@ public class SystemeDecoupe : MonoBehaviour
     public DialogueObject dialogCoupureTom;
     public DialogueObject dialogDebutDissec;
     public DialogueObject dialogMidDissec;
+    public DialogueObject dialogTomCoupeBinome;
     public Color couleurProf;
+    public Color couleurTom;
 
     public int index = 0;
 
@@ -342,6 +344,12 @@ public class SystemeDecoupe : MonoBehaviour
 
             DI.setSpeaker(currentBinome.nom, currentBinome.couleur);
             DI.showDialogue(dialogCoupureBinome);
+
+            while (DI.IsOpen)
+                yield return null;
+
+            DI.setSpeaker("Tom", couleurTom);
+            DI.showDialogue(dialogTomCoupeBinome);
 
             while (DI.IsOpen)
                 yield return null;
