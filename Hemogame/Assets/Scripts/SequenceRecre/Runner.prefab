@@ -1074,7 +1074,7 @@ MonoBehaviour:
   path:
   - {fileID: 6264462677001763454}
   - {fileID: 6264462676578538335}
-  currentDest: {fileID: 6264462677001763454}
+  currentDest: {fileID: 6264462676578538335}
   speed: 3
   moveSpeedMax: 10
   minDist: 0.1
