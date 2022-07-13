@@ -51,6 +51,8 @@ public class Mouse : MonoBehaviour
 
     AudioSource AS;
 
+    bool coIsRunning = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,7 +72,7 @@ public class Mouse : MonoBehaviour
         //    new Vector2(Vector2.Distance(LR.GetPosition(0), LR.GetPosition(LR.positionCount - 1)) / LR.widthMultiplier,
         //        1);
 
-        if (!canCoupe)
+        if (!canCoupe || Time.timeScale < 0.5f || coIsRunning)
             return;
 
         Vector3 mousePos = Input.mousePosition;
@@ -166,6 +168,16 @@ public class Mouse : MonoBehaviour
                 p.select();
                 endingPos = p.getPinPos();
                 p2 = p;
+
+                if(p1 == p2)
+                {
+                    LR.positionCount = 0;
+                    p1.unselect();
+                    p2.unselect();
+                    p1 = null;
+                    p2 = null;
+                    return;
+                }
             }
             else
             {
@@ -288,6 +300,8 @@ public class Mouse : MonoBehaviour
 
     IEnumerator decoupe(Vector3 normal, bool auto = false)
     {
+        coIsRunning = true;
+
         yield return new WaitForSeconds(0.1f);
 
         while(!coupe)
@@ -301,6 +315,7 @@ public class Mouse : MonoBehaviour
             p1 = null;
             p2 = null;
             Destroy(mc);
+            coIsRunning = false;
             yield break;
         }
 
@@ -418,6 +433,8 @@ public class Mouse : MonoBehaviour
             p1 = null;
             p2 = null;
         }
+
+        coIsRunning = false;
     }
 
     void DrawPlane(Vector3 position, Vector3 normal)

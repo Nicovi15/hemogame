@@ -32,7 +32,7 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dialogueUI.IsOpen || !transi.isOut)
+        if (dialogueUI.IsOpen || !transi.isOut || Time.timeScale == 0)
         {
             Cursor.lockState = CursorLockMode.None;
             return;

@@ -20,4 +20,6 @@ MonoBehaviour:
   gainMorale: 6
   perteMorale: -2
   gainPhysique: 15
-  pertePhysique: -5
+  pertePhysique: -2
+  dialog1: {fileID: 0}
+  dialog2: {fileID: 0}

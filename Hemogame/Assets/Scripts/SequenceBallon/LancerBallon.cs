@@ -75,7 +75,7 @@ public class LancerBallon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && jaugeage)
+        if(Input.GetMouseButtonDown(0) && jaugeage && Time.timeScale > 0.5f)
         {
             StartCoroutine(latenceAvantLancer());
         }

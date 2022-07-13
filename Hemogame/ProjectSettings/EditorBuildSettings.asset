@@ -6,20 +6,23 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: bf29ee0844789574da8b334e871d3d4e
+  - enabled: 1
     path: Assets/Scenes/GymnaseV2.unity
     guid: e88dfbd70d617a741bedaa491c5a2e0e
   - enabled: 1
     path: Assets/Scenes/SequenceBallon.unity
     guid: d811051a0b835cd4c9b51ed994f4b3d2
   - enabled: 1
+    path: Assets/Scenes/Recreation.unity
+    guid: 7e4497dc4ed3c6c48a4e295339e1196f
+  - enabled: 1
     path: Assets/Scenes/SVT.unity
     guid: 68cfe4da394cc394daa95f89cc5f22c0
   - enabled: 1
     path: Assets/Scenes/DissectionSVT.unity
     guid: 38c8236021efa2c418362690f2398416
-  - enabled: 1
-    path: Assets/Scenes/Recreation.unity
-    guid: 7e4497dc4ed3c6c48a4e295339e1196f
   - enabled: 0
     path: Assets/Scenes/GymnaseV1.unity
     guid: ddb0d8d90dbfec64a8fbfbb13a8f88aa

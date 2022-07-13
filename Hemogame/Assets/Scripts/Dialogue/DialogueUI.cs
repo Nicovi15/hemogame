@@ -68,7 +68,7 @@ public class DialogueUI : MonoBehaviour
 
             yield return null;
 
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0)/*Input.GetKeyDown(KeyCode.Space)*/);
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && Time.timeScale > 0.5f /*Input.GetKeyDown(KeyCode.Space)*/);
         }
 
         if (dob.HasResponses)
@@ -84,7 +84,7 @@ public class DialogueUI : MonoBehaviour
         {
             yield return null;
 
-            if (Input.GetMouseButtonDown(0)/*Input.GetKeyDown(KeyCode.Space)*/)
+            if (Input.GetMouseButtonDown(0) && Time.timeScale > 0.5f /*Input.GetKeyDown(KeyCode.Space)*/)
             {
                 twe.Stop();
             }

@@ -461,6 +461,7 @@ GameObject:
   - component: {fileID: 468258662223672899}
   - component: {fileID: 468258662223672898}
   - component: {fileID: 468258662223672901}
+  - component: {fileID: 1109310063218871993}
   m_Layer: 15
   m_Name: RandoPerso
   m_TagString: Untagged
@@ -495,7 +496,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 468258662223672896}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 1.2
   m_Height: 7
   m_Direction: 1
@@ -560,6 +561,19 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!65 &1109310063218871993
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468258662223672896}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 6.25, z: 2}
+  m_Center: {x: 0, y: 4.2, z: 0}
 --- !u!1 &468258662261659366
 GameObject:
   m_ObjectHideFlags: 0

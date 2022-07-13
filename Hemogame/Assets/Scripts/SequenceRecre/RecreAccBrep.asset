@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: RecreAccBrep
   m_EditorClassIdentifier: 
   dialogue:
-  - Oui, je devrais surveiller cette blessure.
-  - ' Je vais aussi aller moins vite.'
+  - "Oui, on va aller \xE0 l'infirmerie. Il faut surveiller cette blessure."
   responses: []

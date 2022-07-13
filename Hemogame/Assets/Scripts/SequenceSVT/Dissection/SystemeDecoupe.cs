@@ -179,13 +179,16 @@ public class SystemeDecoupe : MonoBehaviour
 
     public void resetImage()
     {
+        if (DI.IsOpen || questionAccident.activeSelf)
+            return;
+
         //Destroy(currentImage);
         //currentImage = Instantiate(currentCanvas.image);
         //mouse.image = currentImage;
         //nbCoupe = currentCanvas.coupMax;
         //mouse.canCoupe = true;
         //showOutils();
-        if(currentCanvas != null)
+        if (currentCanvas != null)
             Destroy(currentCanvas.gameObject);
         currentCanvas = Instantiate(currentCanvasPrefab);
         currentCanvas.gameObject.SetActive(true);
@@ -226,6 +229,9 @@ public class SystemeDecoupe : MonoBehaviour
 
     public void resetPlace()
     {
+        if (DI.IsOpen || questionAccident.activeSelf)
+            return;
+
         if (currentPlace != null)
             Destroy(currentPlace.gameObject);
         currentPlace = Instantiate(currentPlacePrefab);
@@ -265,6 +271,9 @@ public class SystemeDecoupe : MonoBehaviour
 
     public void selectCiseaux()
     {
+        if (DI.IsOpen || questionAccident.activeSelf)
+            return;
+
         if (currentOutils != null && outilsName == "ciseaux")
             return;
 
@@ -280,6 +289,9 @@ public class SystemeDecoupe : MonoBehaviour
 
     public void selectPinces()
     {
+        if (DI.IsOpen || questionAccident.activeSelf)
+            return;
+
         if (currentOutils != null && outilsName == "pinces")
             return;
 
@@ -298,6 +310,9 @@ public class SystemeDecoupe : MonoBehaviour
 
     public void selectScalpel()
     {
+        if (DI.IsOpen || questionAccident.activeSelf)
+            return;
+
         if (currentOutils != null && outilsName == "scalpel")
             return;
 
@@ -489,14 +504,14 @@ public class SystemeDecoupe : MonoBehaviour
 
     public void dialogueDebut()
     {
-        DI.setSpeaker("Professeur", couleurProf);
+        DI.setSpeaker("Mme Morel", couleurProf);
         DI.showDialogue(dialogDebut);
         toDo = "debut";
     }
 
     public void dialogueFin()
     {
-        DI.setSpeaker("Professeur", couleurProf);
+        DI.setSpeaker("Mme Morel", couleurProf);
         DI.showDialogue(dialogFinProf);
         toDo = "finProf";
     }
@@ -516,7 +531,7 @@ public class SystemeDecoupe : MonoBehaviour
 
     public void validDoigts()
     {
-        if (!currentPlace.canValide)
+        if (!currentPlace.canValide || !currentPlace.canMove)
             return;
 
         Debug.Log("lancement coupe auto");

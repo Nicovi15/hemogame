@@ -65,6 +65,7 @@ public class EleveRebondRecre : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         dir = Vector3.Reflect(dir, collision.contacts[0].normal).normalized;
+        dir = new Vector3(dir.x, 0, dir.z);
     }
 
 }

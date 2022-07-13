@@ -78,7 +78,7 @@ public class GameManagerSVT : MonoBehaviour
     public void changerScene()
     {
         toDo = "changerScene";
-        DI.setSpeaker("Professeur", couleurProf); 
+        DI.setSpeaker("Mme Morel", couleurProf); 
         DI.showDialogue(diagFin);
         BinomeDissection binomeChoisi = Resources.Load<BinomeDissection>("BinomeDissec/"+binome);
         currentBinome.nom = binomeChoisi.nom;

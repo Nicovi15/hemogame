@@ -64,7 +64,7 @@ public class TransiBallon : MonoBehaviour
     public void finFermeture()
     {
         //transiDone = true;
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 
 

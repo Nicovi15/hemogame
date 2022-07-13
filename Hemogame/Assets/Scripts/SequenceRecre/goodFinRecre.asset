@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: goodFinRecre
   m_EditorClassIdentifier: 
   dialogue:
-  - "Je suis arriv\xE9 \xE0 temps !"
+  - C'est bon, on a rejoint le rang.
   responses: []

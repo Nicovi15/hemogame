@@ -8,6 +8,8 @@ TagManager:
   - Doigts
   - CollisionDoigt
   - sousRonde
+  - murRecre
+  - persoRecre
   layers:
   - Default
   - TransparentFX

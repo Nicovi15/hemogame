@@ -96,7 +96,7 @@ public class PickObjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (DialogueUI.IsOpen)
+        if (DialogueUI.IsOpen || Time.timeScale < 0.5f)
         {
             cursor.SetActive(false);
 
@@ -287,6 +287,27 @@ public class PickObjects : MonoBehaviour
             //pickedObject.GetComponent<Rigidbody>().MovePosition(hit.point + offSet);
             //pickedObjectBody.AddForce(dir * speed * Time.deltaTime);
             pickedObjectBody.MovePosition(pickedObject.transform.position + dir * speed * Time.deltaTime);
+    }
+
+    private void OnDisable()
+    {
+        if (!pickedObject)
+            return;
+
+        pickedObject.GetComponent<PickableObject>().unpick();
+        pickedObject.GetComponent<PickableObject>().unhover();
+        pickedObjectBody.mass = initialMass;
+        pickedObject.layer = initialLayer;
+        pickedObjectBody.isKinematic = false;
+        pickedObjectBody.constraints = RigidbodyConstraints.None;
+        pickedObjectBody.useGravity = true;
+        pickedObjectBody.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        pickedObjectBody.interpolation = RigidbodyInterpolation.None;
+        pickedObject = null;
+        pickedObjectBody = null;
+
+        target.SetActive(false);
+        CF.setNormal();
     }
 
 }

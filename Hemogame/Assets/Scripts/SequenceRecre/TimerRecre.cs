@@ -9,7 +9,7 @@ public class TimerRecre : MonoBehaviour
     public float timer;
 
     [SerializeField]
-    public float retard = 0;
+    public float retard = 1;
 
     [SerializeField]
     TextMeshProUGUI chrono;

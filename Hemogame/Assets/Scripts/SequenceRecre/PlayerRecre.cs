@@ -52,6 +52,9 @@ public class PlayerRecre : MonoBehaviour
     Rigidbody rb;
 
     [SerializeField]
+    float dureeColli;
+
+    [SerializeField]
     float dureeBonk;
 
     float cdRun;
@@ -64,6 +67,9 @@ public class PlayerRecre : MonoBehaviour
 
     [SerializeField]
     SpriteRenderer crossCollision;
+
+    [SerializeField]
+    float clignotementRateColli;
 
     [SerializeField]
     float clignotementRate;
@@ -83,7 +89,33 @@ public class PlayerRecre : MonoBehaviour
     [SerializeField]
     GameManagerRecre GM;
 
+    [SerializeField]
+    GestionJaugeHemo jauges;
+
+    [SerializeField]
+    int limitePhysique;
+
+    [SerializeField]
+    Transform raycastT;
+
+    [SerializeField]
+    FollowerRecre FR;
+
+    [SerializeField]
+    GameObject canvasMess;
+
+    [SerializeField]
+    string followerName;
+
+    [SerializeField]
+    Color followerColor;
+
+    [SerializeField]
+    List<string> messagesFeedback;
+
     public bool blesse = false;
+
+    RigidbodyConstraints previousConstraints;
 
     // Start is called before the first frame update
     void Start()
@@ -94,6 +126,7 @@ public class PlayerRecre : MonoBehaviour
         crossCollision.enabled = false;
 
         currentMoveSpeedMax = moveSpeedMax;
+        FR.mustFollow = true;
     }
 
     // Update is called once per frame
@@ -133,7 +166,7 @@ public class PlayerRecre : MonoBehaviour
 
             if (Input.GetAxisRaw("Vertical") != 0)
             {
-                if (Input.GetAxisRaw("Vertical") > 0 && !Physics.Raycast(transform.position, transform.forward, distanceRaycast, obstaclesLayers))
+                if (Input.GetAxisRaw("Vertical") > 0 && !Physics.Raycast(raycastT.position, transform.forward, distanceRaycast, obstaclesLayers))
                 {
                     if (currentMoveSpeed < currentMoveSpeedMax)
                         currentMoveSpeed += acceleration * Time.deltaTime;
@@ -158,8 +191,8 @@ public class PlayerRecre : MonoBehaviour
                     currentMoveSpeed = moveSpeedinit;
             }
         }
-        
-            
+
+        //FR.currentMoveSpeed = currentMoveSpeed;
     }
 
     private void FixedUpdate()
@@ -182,18 +215,75 @@ public class PlayerRecre : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(currentMoveSpeed > speedAccident && ((obstaclesLayers & (1 << collision.gameObject.layer)) != 0))
+        //if(currentMoveSpeed > speedAccident && ((obstaclesLayers & (1 << collision.gameObject.layer)) != 0))
+        //{
+        //    previousConstraints = rb.constraints;
+        //    rb.constraints = RigidbodyConstraints.FreezeAll;
+        //
+        //    Debug.Log("Accident");
+        //    anim.SetTrigger("Chute");
+        //    currentMoveSpeed = 0;
+        //    rb.velocity = Vector3.zero;
+        //    cdRun = 0;
+        //    canRun = false;
+        //
+        //    currentVie -= 1;
+        //    StartCoroutine(remiseSurPied());
+        //    
+        //}
+
+        if(currentMoveSpeed > 0.25 * moveSpeedMax && ((obstaclesLayers & (1 << collision.gameObject.layer)) != 0))
         {
-            Debug.Log("Accident");
-            anim.SetTrigger("Chute");
+            int pertePhysique = 0;
+
+            if(collision.gameObject.tag == "murRecre")
+            {
+                if (currentMoveSpeed > 0.75f * moveSpeedMax)
+                    pertePhysique = -10;
+                else if (currentMoveSpeed > 0.5f * moveSpeedMax)
+                    pertePhysique = -8;
+                else
+                    pertePhysique = 0; // -6;
+
+            }
+            else if(collision.gameObject.tag == "persoRecre")
+            {
+                if (currentMoveSpeed > 0.75f * moveSpeedMax)
+                    pertePhysique = -6;
+                else if (currentMoveSpeed > 0.5f * moveSpeedMax)
+                    pertePhysique = -4;
+                else
+                    pertePhysique = 0; // -6;
+            }
+
+            if (pertePhysique == 0)
+                return;
+
+            //FR.enabled = false;
+            
+            previousConstraints = rb.constraints;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
             currentMoveSpeed = 0;
             rb.velocity = Vector3.zero;
             cdRun = 0;
             canRun = false;
 
-            currentVie -= 1;
-            StartCoroutine(remiseSurPied());
-            
+            jauges.addPhysique(pertePhysique);
+
+            MessageFeedback mf = Instantiate(canvasMess).GetComponent<MessageFeedback>();
+            mf.showString(messagesFeedback[Random.Range((int)0, messagesFeedback.Count)], followerName, followerColor);
+
+            if (jauges.jauges.physique <= limitePhysique)
+            {
+                anim.SetTrigger("Chute");
+                StartCoroutine(remiseSurPied());
+            }
+            else
+            {
+                anim.SetTrigger("Recul");
+                StartCoroutine(PetiteCollision());
+            }
+
         }
     }
 
@@ -209,8 +299,39 @@ public class PlayerRecre : MonoBehaviour
             goutteDir.color = couleur1;
     }
 
+    IEnumerator PetiteCollision()
+    {
+        float t = 0;
+        goutteDir.gameObject.SetActive(false);
+
+        while (cdRun < dureeColli)
+        {
+            cdRun += Time.deltaTime;
+
+            t += Time.deltaTime;
+
+            if (t > clignotementRateColli)
+            {
+                t = 0;
+                goutteDir.gameObject.SetActive(!goutteDir.gameObject.activeSelf);
+            }
+
+            yield return null;
+        }
+
+        goutteDir.gameObject.SetActive(true);
+
+        rb.constraints = previousConstraints;
+        //FR.enabled = true;
+        //FR.mustFollow = true;
+
+        canRun = true;
+    }
+
     IEnumerator remiseSurPied()
     {
+        FR.mustFollow = false;
+
         float t = 0;
         goutteDir.gameObject.SetActive(false);
         crossCollision.gameObject.SetActive(true);
@@ -233,14 +354,18 @@ public class PlayerRecre : MonoBehaviour
         goutteDir.gameObject.SetActive(true);
         crossCollision.gameObject.SetActive(false);
 
-        if (currentVie != 0)
-            canRun = true;
-        else
-        {
-            Debug.Log("lancer quesiton");
-            GM.lancerQuestionAccident();
-        }
-        
+        rb.constraints = previousConstraints;
+        //FR.enabled = true;
+        FR.mustFollow = true;
+
+        //if (currentVie != 0)
+        //    canRun = true;
+        //else
+        //{
+        //    Debug.Log("lancer quesiton");
+        //    GM.lancerQuestionAccident();
+        //}
+        GM.lancerQuestionAccident();
     }
 
     public void lancerPartie()
@@ -275,5 +400,10 @@ public class PlayerRecre : MonoBehaviour
         //currentVie = vieMax;
 
         currentVie = v;
+    }
+
+    public float getVelocity()
+    {
+        return rb.velocity.magnitude;
     }
 }

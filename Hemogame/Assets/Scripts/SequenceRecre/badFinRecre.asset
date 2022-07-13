@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: badFinRecre
   m_EditorClassIdentifier: 
   dialogue:
-  - Oh non ! Je suis en retard ...
+  - Oh non ! On est en retard ...
   responses: []

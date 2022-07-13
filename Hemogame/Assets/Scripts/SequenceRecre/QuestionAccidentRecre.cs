@@ -83,7 +83,7 @@ public class QuestionAccidentRecre : MonoBehaviour
         {
             yield return null;
 
-            if (Input.GetMouseButtonDown(0)/*Input.GetKeyDown(KeyCode.Space)*/)
+            if (Input.GetMouseButtonDown(0) && Time.timeScale > 0.5f/*Input.GetKeyDown(KeyCode.Space)*/)
             {
                 twe.Stop();
             }
@@ -97,14 +97,14 @@ public class QuestionAccidentRecre : MonoBehaviour
 
     public void reponse1()
     {
-        DI.setSpeaker("Tom", couleurProf);
+        DI.setSpeaker("Alex", couleurProf);
         DI.showDialogue(mrephemo);
         gameObject.SetActive(false);
     }
 
     public void reponse2()
     {
-        DI.setSpeaker("Tom", couleurProf);
+        DI.setSpeaker("Alex", couleurProf);
         DI.showDialogue(brephemo);
         gameObject.SetActive(false);
     }

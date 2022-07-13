@@ -49,7 +49,7 @@ public class CameraFollowCircle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dialogueUI.IsOpen)
+        if (dialogueUI.IsOpen || Time.timeScale < 0.5f)
         {
             return;
         }

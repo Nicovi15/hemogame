@@ -76,7 +76,7 @@ public class QuestionsAccident : MonoBehaviour
         {
             yield return null;
 
-            if (Input.GetMouseButtonDown(0)/*Input.GetKeyDown(KeyCode.Space)*/)
+            if (Input.GetMouseButtonDown(0) && Time.timeScale > 0.5f/*Input.GetKeyDown(KeyCode.Space)*/)
             {
                 twe.Stop();
             }

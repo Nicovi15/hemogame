@@ -164,16 +164,21 @@ public class GameManagerSequenceBallon : MonoBehaviour
     public void TomParticipe()
     {
         questionParticip.SetActive(false);
-        Jauges.addMoraleGraph(25, 1, 0, 0);
-        Jauges.addPhysiqueGraph(5, 1, 0, 0);
-        StartCoroutine(lancerJeu(3));
+        //Jauges.addMoraleGraph(25, 1, 0, 0);
+        //Jauges.addPhysiqueGraph(5, 1, 0, 0);
+        Jauges.addMorale(20);
+        Jauges.addPhysique(5);
+        StartCoroutine(lancerJeu(1));
     }
 
     public void TomParticipePas()
     {
         questionParticip.SetActive(false);
-        Jauges.addMoraleGraph(-20, 1, 0, 0);
-        Jauges.addPhysiqueGraph(-15, 1, 0, 0);
+        //Jauges.addMoraleGraph(-20, 1, 0, 0);
+        //Jauges.addPhysiqueGraph(-15, 1, 0, 0);
+        Jauges.addMorale(-15);
+        Jauges.addPhysique(-10);
+
 
         receveurs.Remove(TomReceveur);
         Destroy(TomReceveur.gameObject);
@@ -184,7 +189,7 @@ public class GameManagerSequenceBallon : MonoBehaviour
         }
 
 
-        StartCoroutine(lancerJeu(3));
+        StartCoroutine(lancerJeu(1));
     }
 
     public void afficherSaignement()

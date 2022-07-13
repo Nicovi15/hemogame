@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: PresentationObjectifs
   m_EditorClassIdentifier: 
   dialogue:
-  - "Bonjour \xE0 tous, j\u2019esp\xE8re que vous allez bien ! \nAujourd\u2019hui
-    nous allons faire de la gymnastique."
-  - "On va commencer par un \xE9chauffement avec du lancer de balle et des exercices
-    au cerceau puis on fera de la gym au sol."
-  - "Je vous laisse installer les tapis et sortir tout ce dont on aura besoin. Et
-    ne laissez rien tra\xEEner qui pourrait \xEAtre dangereux !"
+  - "Bonjour, je suis Madame Dupont, votre professeur de sport pour cette ann\xE9e.
+    J\u2019esp\xE8re que vous \xEAtes en forme et que l\u2019ann\xE9e se passera
+    bien !"
+  - "Pour cette premi\xE8re s\xE9ance, nous allons commencer doucement avec des balles
+    en mousse pour faire des exercices de passes."
+  - Nous ferons aussi un peu de gymnastique avec des cerceaux.
+  - "Comme vous \xEAtes grands maintenant, je vous laisse aller chercher les ballons
+    et les cerceaux dans les armoires et installer des tapis au centre du terrain."
+  - "Attention \xE0 ne rien laisser tra\xEEner l\xE0 o\xF9 on va s'entra\xEEner !"
   responses: []

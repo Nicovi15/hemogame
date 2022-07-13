@@ -24,7 +24,7 @@ public class BoutonValidePlace : MonoBehaviour
     void Update()
     {
         if (SD.currentPlace != null)
-            if (SD.currentPlace.canValide)
+            if (SD.currentPlace.canValide && SD.currentPlace.canMove)
                 im.color = validColor;
             else
                 im.color = nonvalidColor;

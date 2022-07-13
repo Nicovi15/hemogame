@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: RecreAccMrep
   m_EditorClassIdentifier: 
   dialogue:
-  - "Je devrais plut\xF4t surveiller cette blessure."
-  - ' Je vais aussi aller moins vite'
+  - "Non, on va plut\xF4t aller \xE0 l'infirmerie. Il faut surveiller cette blessure."
   responses: []

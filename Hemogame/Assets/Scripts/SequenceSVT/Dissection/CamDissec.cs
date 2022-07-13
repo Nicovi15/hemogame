@@ -13,23 +13,43 @@ public class CamDissec : MonoBehaviour
     [SerializeField]
     Animator anim;
 
+    [SerializeField]
+    GameObject questionAccident;
+
+    [SerializeField]
+    DialogueUI DI;
+
+    public PlaceFleur pf;
+
     public void TriggerNote()
     {
+        if (DI.IsOpen || questionAccident.activeSelf || (pf != null && !pf.canMove))
+            return;
+
         anim.SetTrigger("goToNote");
     }
 
     public void TriggerDissec()
     {
+        if (DI.IsOpen || questionAccident.activeSelf || (pf != null && !pf.canMove))
+            return;
+
         anim.SetTrigger("goToDissec");
     }
 
     public void TriggerProf()
     {
+        //if (DI.IsOpen || questionAccident.activeSelf || (pf != null && !pf.canMove))
+        //    return;
+
         anim.SetTrigger("goToProf");
     }
 
     public void debutDissecToNote()
     {
+        if (DI.IsOpen || questionAccident.activeSelf || (pf != null && !pf.canMove))
+            return;
+
         UiDissec.SetActive(false);
         UiPlace.SetActive(false);
         SD.hideOutils();
@@ -37,12 +57,18 @@ public class CamDissec : MonoBehaviour
 
     public void finDissecToNote()
     {
+        if (DI.IsOpen || questionAccident.activeSelf || (pf != null && !pf.canMove))
+            return;
+
         UiNote.SetActive(true);
     }
 
 
     public void DebutNotetoDissec()
     {
+        if (DI.IsOpen || questionAccident.activeSelf || (pf != null && !pf.canMove))
+            return;
+
         UiNote.SetActive(false);
         if (SD.isDissec)
             SD.resetImage();
@@ -53,6 +79,9 @@ public class CamDissec : MonoBehaviour
 
     public void finNoteToDissec()
     {
+        if (DI.IsOpen || questionAccident.activeSelf || (pf != null && !pf.canMove))
+            return;
+
         if (SD.isDissec)
             UiDissec.SetActive(true);
         else
@@ -62,6 +91,9 @@ public class CamDissec : MonoBehaviour
 
     public void finProfToDissec()
     {
+        if (DI.IsOpen || questionAccident.activeSelf || (pf != null && !pf.canMove))
+            return;
+
         //UiDissec.SetActive(true);
         //SD.showOutils();
         SD.lancementDissec();
@@ -70,11 +102,24 @@ public class CamDissec : MonoBehaviour
 
     public void debutProfToDissec()
     {
+        if (DI.IsOpen || questionAccident.activeSelf || (pf != null && !pf.canMove))
+            return;
+
+        SD.hideOutils();
+    }
+
+    public void debutDissecToProf()
+    {
+        UiDissec.SetActive(false);
+        UiPlace.SetActive(false);
         SD.hideOutils();
     }
 
     public void finDissecToProf()
     {
+        //if (DI.IsOpen || questionAccident.activeSelf || (pf != null && !pf.canMove))
+        //    return;
+
         SD.dialogueFin();
     }
 

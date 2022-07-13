@@ -7,6 +7,11 @@ public class FinishRecre : MonoBehaviour
     [SerializeField]
     GameManagerRecre GM;
 
+    [SerializeField]
+    Vector3 infirmeriePos;
+
+    bool infirmerie = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +24,20 @@ public class FinishRecre : MonoBehaviour
         
     }
 
+    public void setInfirmerie()
+    {
+        infirmerie = true;
+        transform.position = infirmeriePos;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("finish");
-        GM.finish();
+        if (infirmerie)
+            GM.finishInfirmerie();
+        else
+            GM.finish();
+
+        gameObject.SetActive(false);
     }
 }

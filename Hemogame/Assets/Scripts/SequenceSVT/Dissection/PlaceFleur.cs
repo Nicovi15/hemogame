@@ -41,12 +41,13 @@ public class PlaceFleur : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
+        cam.GetComponent<CamDissec>().pf = this;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!canMove)
+        if (!canMove || Time.timeScale < 0.5f)
             return;
 
         Ray ray;

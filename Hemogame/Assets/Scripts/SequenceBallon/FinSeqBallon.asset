@@ -15,4 +15,5 @@ MonoBehaviour:
   dialogue:
   - "Le cours est termin\xE9 !"
   - "Rangez le mat\xE9riel, puis retournez aux vestiaires."
+  - "Lorsque vous \xEAtes chang\xE9s, allez directement en r\xE9cr\xE9ation."
   responses: []

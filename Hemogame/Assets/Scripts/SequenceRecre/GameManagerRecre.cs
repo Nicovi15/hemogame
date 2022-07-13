@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,10 +21,22 @@ public class GameManagerRecre : MonoBehaviour
     Color colorTom;
 
     [SerializeField]
+    Color colorAlex;
+
+    [SerializeField]
     DialogueObject introRecre;
 
     [SerializeField]
+    DialogueObject introRecre2;
+
+    [SerializeField]
+    DialogueObject moinsViteDiag;
+
+    [SerializeField]
     DialogueObject goodFinRecre;
+
+    [SerializeField]
+    DialogueObject infirmFinRecre;
 
     [SerializeField]
     DialogueObject badFinRecre;
@@ -36,6 +49,9 @@ public class GameManagerRecre : MonoBehaviour
 
     [SerializeField]
     GameObject questionAccident;
+
+    [SerializeField]
+    FinishRecre fr;
 
     AudioSource AS;
 
@@ -71,26 +87,54 @@ public class GameManagerRecre : MonoBehaviour
                 lancerPartie();
                 toDo = "";
             }
+            else if (toDo == "intro2")
+            {
+                AS.Play();
+                DI.setSpeaker("Alex", colorAlex);
+                DI.showDialogue(introRecre2);
+                toDo = "lancerPartie";
+            }
             else if (toDo == "finPartie")
             {
+                if (TR.retard > 1)
+                {
+                    if (TR.retard > 60)
+                        perteMoral = -30;
+                    else if (TR.retard > 60)
+                        perteMoral = -20;
+                    else
+                        perteMoral = -10;
+
+                    DI.setSpeaker("Tom", colorTom);
+                    DI.showDialogue(badFinRecre);
+
+                    toDo = "retard";
+                    return;
+                }
+
                 transi.triggerFermeture();
                 toDo = "";
             }
             else if(toDo == "retard")
             {
-                jauges.addMoraleGraph(perteMoral, 1, 0, 0);
-                StartCoroutine(lancerTransiFin());
-                toDo = "";
+                jauges.addMorale(perteMoral);
+                //StartCoroutine(lancerTransiFin());
+                toDo = "fin";
+            }
+            else if(toDo == "fin")
+            {
+                StartCoroutine(lancerTransiFin(1));
             }
         }
     }
 
     public void dialogDebut()
     {
-        AS.Play();
+        //AS.Play();
         DI.setSpeaker("Tom", colorTom);
         DI.showDialogue(introRecre);
-        toDo = "lancerPartie";
+        //toDo = "lancerPartie";
+        toDo = "intro2";
     }
 
 
@@ -101,33 +145,29 @@ public class GameManagerRecre : MonoBehaviour
         PR.lancerPartie();
     }
 
+    public void finishInfirmerie()
+    {
+        RunCanvas.SetActive(false);
+        TR.endTimer();
+        PR.finPartie();
+
+        //Debug.Log("infirm");
+
+        DI.setSpeaker("Tom", colorTom);
+        DI.showDialogue(infirmFinRecre);
+        toDo = "finPartie";
+    }
+
     public void finish()
     {
         RunCanvas.SetActive(false);
         TR.endTimer();
         PR.finPartie();
 
-        if(TR.retard <= 0)
-        {
-            DI.setSpeaker("Tom", colorTom);
-            DI.showDialogue(goodFinRecre);
-            toDo = "finPartie";
-        }
-        else
-        {
-            if (TR.retard > 60)
-                perteMoral = -30;
-            else if (TR.retard > 60)
-                perteMoral = -20;
-            else
-                perteMoral = -10;
+        DI.setSpeaker("Tom", colorTom);
+        DI.showDialogue(goodFinRecre);
+        toDo = "finPartie";
 
-            DI.setSpeaker("Tom", colorTom);
-            DI.showDialogue(badFinRecre);
-
-            toDo = "retard";
-        }
-        
     }
 
     public void lancerQuestionAccident()
@@ -143,6 +183,8 @@ public class GameManagerRecre : MonoBehaviour
         PR.finPartie();
 
         questionAccident.SetActive(true);
+
+        fr.setInfirmerie();
         
         while (questionAccident.activeSelf)
             yield return null;
@@ -150,9 +192,11 @@ public class GameManagerRecre : MonoBehaviour
         while (DI.IsOpen)
             yield return null;
 
-        //////// perte jauges, dialogues, etc ????
-        ///
+        DI.setSpeaker("Tom", colorTom);
+        DI.showDialogue(moinsViteDiag);
 
+        while (DI.IsOpen)
+            yield return null;
 
         PR.seBlesse();
         RunCanvas.SetActive(true);

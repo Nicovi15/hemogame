@@ -86,7 +86,7 @@ public class QuestionAccidentDissec : MonoBehaviour
         {
             yield return null;
 
-            if (Input.GetMouseButtonDown(0)/*Input.GetKeyDown(KeyCode.Space)*/)
+            if (Input.GetMouseButtonDown(0) && Time.timeScale > 0.5f/*Input.GetKeyDown(KeyCode.Space)*/)
             {
                 twe.Stop();
             }
@@ -100,7 +100,7 @@ public class QuestionAccidentDissec : MonoBehaviour
 
     public void reponse1()
     {
-        DI.setSpeaker("Professeur", couleurProf);
+        DI.setSpeaker("Mme Morel", couleurProf);
         if (isHemo)
             DI.showDialogue(mrephemo);
         else
@@ -110,7 +110,7 @@ public class QuestionAccidentDissec : MonoBehaviour
 
     public void reponse2()
     {
-        DI.setSpeaker("Professeur", couleurProf);
+        DI.setSpeaker("Mme Morel", couleurProf);
         if (isHemo)
             DI.showDialogue(brephemo);
         else
@@ -120,7 +120,7 @@ public class QuestionAccidentDissec : MonoBehaviour
 
     public void reponse3()
     {
-        DI.setSpeaker("Professeur", couleurProf);
+        DI.setSpeaker("Mme Morel", couleurProf);
         if (isHemo)
             DI.showDialogue(mrephemo);
         else
@@ -130,7 +130,7 @@ public class QuestionAccidentDissec : MonoBehaviour
 
     public void reponse4()
     {
-        DI.setSpeaker("Professeur", couleurProf);
+        DI.setSpeaker("Mme Morel", couleurProf);
         if (isHemo)
             DI.showDialogue(mrephemo);
         else

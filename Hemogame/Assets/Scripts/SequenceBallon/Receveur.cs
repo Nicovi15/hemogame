@@ -183,7 +183,8 @@ public class Receveur : MonoBehaviour
         mf.showString(messageNormal, nom, col);
 
         if (isHemo)
-            jauges.addPhysiqueGraph(7,0.7f,-600,0);
+            jauges.addPhysique(7);
+            //jauges.addPhysiqueGraph(7,0.7f,-600,0);
 
         return true;
     }

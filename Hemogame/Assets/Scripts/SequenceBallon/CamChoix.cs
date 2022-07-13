@@ -13,6 +13,9 @@ public class CamChoix : MonoBehaviour
     [SerializeField]
     GameObject Question;
 
+    [SerializeField]
+    Color couleurProf;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +32,7 @@ public class CamChoix : MonoBehaviour
     {
         MessageFeedback mf = Instantiate(canvasMess).GetComponent<MessageFeedback>();
         mf.setXpos(-600);
-        mf.showString(GM.currentReceveur.nom + messageNormal, "Ludovic", Color.magenta);
+        mf.showString(GM.currentReceveur.nom + messageNormal, "Ludovic", couleurProf);
     }
 
     public void afficherSang()

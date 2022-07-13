@@ -60,7 +60,7 @@ public class TransiMEP : MonoBehaviour
     public void finFermeture()
     {
         transiDone = true;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     IEnumerator loadScene()

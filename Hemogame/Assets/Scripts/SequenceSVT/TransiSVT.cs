@@ -62,6 +62,6 @@ public class TransiSVT : MonoBehaviour
     public void finFermeture()
     {
         //transiDone = true;
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(5);
     }
 }
