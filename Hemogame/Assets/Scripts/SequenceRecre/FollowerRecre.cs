@@ -57,11 +57,11 @@ public class FollowerRecre : MonoBehaviour
     {
         this.transform.LookAt(target);
 
-        if (Vector3.Distance(transform.position, target.position) < minDistance)
-        {
-            anim.SetFloat("vitesse", 0);
-            return;
-        }
+        //if (Vector3.Distance(transform.position, target.position) < minDistance)
+        //{
+        //    anim.SetFloat("vitesse", 0);
+        //    return;
+        //}
             
 
         anim.SetFloat("vitesse", PR.currentMoveSpeed);

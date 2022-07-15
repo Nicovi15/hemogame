@@ -636,7 +636,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Jouez toutes les sc\xE8nes dans l'odre en s\xE9lectionnant \"Jouer\"\nou
+  m_text: "Jouez toutes les sc\xE8nes dans l'ordre en s\xE9lectionnant \"Jouer\"\nou
     choissisez une sc\xE8ne en particulier \xE0 l'aide du menu \"Chapitres\".\n\nDans
     une sc\xE8ne, le jeu peut \xEAtre mis en pause \xE0 l'aide de la touche \"Echap\".
     Dans le menu de pause, acc\xE9dez aux commandes du jeu en s\xE9lectionnant l'option

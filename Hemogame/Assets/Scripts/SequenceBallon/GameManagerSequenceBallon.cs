@@ -58,6 +58,9 @@ public class GameManagerSequenceBallon : MonoBehaviour
     [SerializeField]
     GameObject saignement;
 
+    [SerializeField]
+    FinSeqBallon finBallon;
+
 
     // Start is called before the first frame update
     void Start()
@@ -116,6 +119,7 @@ public class GameManagerSequenceBallon : MonoBehaviour
         camPlayer.GetComponent<AudioListener>().enabled = false;
         camChoix.GetComponent<Animator>().SetTrigger("Travel");
         HUDechauf.SetActive(false);
+        finBallon.fin = (int)FinSeqBallon.Cas.PartEtBless;
 
     }
 
@@ -169,6 +173,7 @@ public class GameManagerSequenceBallon : MonoBehaviour
         Jauges.addMorale(20);
         Jauges.addPhysique(5);
         StartCoroutine(lancerJeu(1));
+        finBallon.fin = (int)FinSeqBallon.Cas.PartEtNonBless;
     }
 
     public void TomParticipePas()
@@ -187,7 +192,7 @@ public class GameManagerSequenceBallon : MonoBehaviour
             r.maxFile--;
             r.posFinFile += new Vector3(r.step, 0, 0);
         }
-
+        finBallon.fin = (int)FinSeqBallon.Cas.NonPart;
 
         StartCoroutine(lancerJeu(1));
     }

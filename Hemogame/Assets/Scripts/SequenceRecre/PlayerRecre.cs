@@ -102,6 +102,9 @@ public class PlayerRecre : MonoBehaviour
     FollowerRecre FR;
 
     [SerializeField]
+    FollowerRecre FR2;
+
+    [SerializeField]
     GameObject canvasMess;
 
     [SerializeField]
@@ -126,7 +129,8 @@ public class PlayerRecre : MonoBehaviour
         crossCollision.enabled = false;
 
         currentMoveSpeedMax = moveSpeedMax;
-        FR.mustFollow = true;
+        FR.mustFollow = false;
+        FR2.mustFollow = false;
     }
 
     // Update is called once per frame
@@ -331,6 +335,7 @@ public class PlayerRecre : MonoBehaviour
     IEnumerator remiseSurPied()
     {
         FR.mustFollow = false;
+        FR2.mustFollow = false;
 
         float t = 0;
         goutteDir.gameObject.SetActive(false);
@@ -357,6 +362,7 @@ public class PlayerRecre : MonoBehaviour
         rb.constraints = previousConstraints;
         //FR.enabled = true;
         FR.mustFollow = true;
+        FR2.mustFollow = true;
 
         //if (currentVie != 0)
         //    canRun = true;
@@ -373,6 +379,8 @@ public class PlayerRecre : MonoBehaviour
         enCours = true;
         goutteDir.enabled = true;
         crossCollision.enabled = true;
+        FR.mustFollow = true;
+        FR2.mustFollow = true;
     }
 
     public void seBlesse()

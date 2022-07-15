@@ -59,6 +59,13 @@ public class GameManagerRecre : MonoBehaviour
 
     string toDo = "";
 
+    [SerializeField]
+    FinSeqBallon finBallon;
+
+    [SerializeField]
+    List<DialogDebRecre> diags;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -130,11 +137,25 @@ public class GameManagerRecre : MonoBehaviour
 
     public void dialogDebut()
     {
-        //AS.Play();
-        DI.setSpeaker("Tom", colorTom);
-        DI.showDialogue(introRecre);
-        //toDo = "lancerPartie";
-        toDo = "intro2";
+        //  //AS.Play();
+        //  DI.setSpeaker("Tom", colorTom);
+        //  DI.showDialogue(introRecre);
+        //  //toDo = "lancerPartie";
+
+        StartCoroutine(diagDebutCor());
+        
+    }
+
+    IEnumerator diagDebutCor()
+    {
+        DialogDebRecre d = diags[finBallon.fin];
+
+        StartCoroutine(d.startDialogue());
+
+        while (d.isRunning)
+            yield return null;
+
+        toDo = "lancerPartie";
     }
 
 

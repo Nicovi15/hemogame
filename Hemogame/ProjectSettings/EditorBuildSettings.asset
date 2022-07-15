@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DissectionSVT.unity
     guid: 38c8236021efa2c418362690f2398416
+  - enabled: 1
+    path: Assets/Scenes/Bilan.unity
+    guid: e9c837bb59acdbc46bb2294a5127b162
   - enabled: 0
     path: Assets/Scenes/GymnaseV1.unity
     guid: ddb0d8d90dbfec64a8fbfbb13a8f88aa

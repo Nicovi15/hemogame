@@ -983,6 +983,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: IGMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 2336942490537665710, guid: 1665eb0e9720a49469099cb1f31268bf, type: 3}
+      propertyPath: panelComment
+      value: 
+      objectReference: {fileID: 166459887}
     - target: {fileID: 2336942490537665711, guid: 1665eb0e9720a49469099cb1f31268bf, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1069,6 +1073,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1665eb0e9720a49469099cb1f31268bf, type: 3}
+--- !u!1 &166459887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1289219330, guid: 1665eb0e9720a49469099cb1f31268bf, type: 3}
+  m_PrefabInstance: {fileID: 166459886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &178748013
 GameObject:
   m_ObjectHideFlags: 0

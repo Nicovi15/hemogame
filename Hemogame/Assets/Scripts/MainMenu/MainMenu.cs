@@ -25,7 +25,7 @@ public class MainMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         jauges.physique = 50;
-        jauges.morale = 75;
+        jauges.morale = 60;
     }
     public void buttonJouer()
     {
