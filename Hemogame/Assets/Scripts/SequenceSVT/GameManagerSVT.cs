@@ -33,6 +33,9 @@ public class GameManagerSVT : MonoBehaviour
     [SerializeField]
     BinomeDissection currentBinome;
 
+    [SerializeField]
+    AudioPlayer AP;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +59,7 @@ public class GameManagerSVT : MonoBehaviour
             else if(toDo == "changerScene")
             {
                 //SceneManager.LoadScene(3);
+                AP.stopFadeMusic();
                 transi.triggerFermeture();
                 toDo = "";
             }
@@ -65,6 +69,7 @@ public class GameManagerSVT : MonoBehaviour
     public void dialogDebut()
     {
         toDo = "choixBinome";
+        AP.playFadeMusic();
         DI.showDialogue(diagDebut);
     }
 

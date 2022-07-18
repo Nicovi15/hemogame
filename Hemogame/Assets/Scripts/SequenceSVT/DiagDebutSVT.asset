@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DiagDebutSVT
   m_EditorClassIdentifier: 
   dialogue:
-  - "Bonjour \xE0 tous, aujourd\u2019hui nous allons faire la dissection d\u2019une
-    fleur puis nous observerons le pollen au microscope."
+  - "Bonjour \xE0 tous, aujourd\u2019hui nous allons voir la dissection d\u2019une
+    fleur."
   - "Je vais vous demander de vous mettre par deux pour manipuler s\u2019il vous
     pla\xEEt."
   responses: []

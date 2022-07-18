@@ -74,7 +74,8 @@ public class GestionJaugeHemo : MonoBehaviour
         if (tomRender == null && tomRender2 == null)
             return;
         Material m = tomRender2 == null ? tomRender.material : tomRender2.material;
-        m.SetColor("_BaseColor", new Color(tomColor.r, tomColor.g, tomColor.b, 0.5f + (0.5f * (((float)jauges.physique) / 100f))));
+        //m.SetColor("_BaseColor", new Color(tomColor.r, tomColor.g, tomColor.b, 0.5f + (0.5f * (((float)jauges.physique) / 100f))));
+        m.SetFloat("_Opacity", 0.7f + (0.30f * (((float)jauges.physique) / 100f)));
     }
 
 

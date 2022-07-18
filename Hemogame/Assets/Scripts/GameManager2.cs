@@ -35,6 +35,9 @@ public class GameManager2 : MonoBehaviour
     [SerializeField]
     ChoixPlacement choixP;
 
+    [SerializeField]
+    AudioPlayer AP;
+
 
     // Start is called before the first frame update
     void Start()
@@ -89,6 +92,7 @@ public class GameManager2 : MonoBehaviour
         choixP.cerceauChoisi = armCerceaux.selectedObject.GetComponent<PickableObject>().data;
 
         transi.GetComponent<TransiMEP>().triggerFermeture();
+        AP.stopFadeMusic();
     }
 
 

@@ -8,6 +8,9 @@ public class TransiMEP : MonoBehaviour
     [SerializeField]
     DialogueUI diag;
 
+    [SerializeField]
+    AudioPlayer AP;
+
     Animator anim;
 
     public bool isOut;
@@ -45,6 +48,7 @@ public class TransiMEP : MonoBehaviour
 
     public void triggerDialogue()
     {
+        AP.playFadeMusic();
         diag.startDialogue();
         //this.gameObject.SetActive(false);
     }

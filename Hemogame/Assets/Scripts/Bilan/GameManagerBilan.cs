@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class GameManagerBilan : MonoBehaviour
 {
     [SerializeField]
@@ -44,6 +44,18 @@ public class GameManagerBilan : MonoBehaviour
     [SerializeField]
     float vitesseJauge;
 
+    [SerializeField]
+    Color jaugeVert;
+
+    [SerializeField]
+    Color jaugeJaune;
+
+    [SerializeField]
+    Color jaugeRouge;
+
+    [SerializeField]
+    AudioPlayer AP;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,7 +70,7 @@ public class GameManagerBilan : MonoBehaviour
 
     public void debBilan()
     {
-
+        AP.playFadeMusic();
         StartCoroutine(derouleBilan());
     }
 
@@ -132,8 +144,22 @@ public class GameManagerBilan : MonoBehaviour
             a += vitesseJauge * Time.deltaTime;
             jaugePhysique.fillAmount = a / 100;
             yield return null;
+
+            if (jaugePhysique.fillAmount >= 0.66)
+                jaugePhysique.color = jaugeVert;
+            else if (jaugePhysique.fillAmount >= 0.33)
+                jaugePhysique.color = jaugeJaune;
+            else
+                jaugePhysique.color = jaugeRouge;
         }
         jaugePhysique.fillAmount = GJH.jauges.physique / 100f;
+
+        if (jaugePhysique.fillAmount >= 0.66)
+            jaugePhysique.color = jaugeVert;
+        else if (jaugePhysique.fillAmount >= 0.33)
+            jaugePhysique.color = jaugeJaune;
+        else
+            jaugePhysique.color = jaugeRouge;
     }
 
     IEnumerator remplirJaugeMorale()
@@ -144,9 +170,53 @@ public class GameManagerBilan : MonoBehaviour
         {
             a += vitesseJauge * Time.deltaTime;
             jaugeMorale.fillAmount = a / 100;
+
+            if (jaugeMorale.fillAmount >= 0.66)
+                jaugeMorale.color = jaugeVert;
+            else if (jaugeMorale.fillAmount >= 0.33)
+                jaugeMorale.color = jaugeJaune;
+            else
+                jaugeMorale.color = jaugeRouge;
+
             yield return null;
         }
         jaugeMorale.fillAmount = GJH.jauges.morale / 100f;
+
+        if (jaugeMorale.fillAmount >= 0.66)
+            jaugeMorale.color = jaugeVert;
+        else if (jaugeMorale.fillAmount >= 0.33)
+            jaugeMorale.color = jaugeJaune;
+        else
+            jaugeMorale.color = jaugeRouge;
+    }
+
+    public void retourMenu()
+    {
+        AP.stopFadeMusic();
+        SceneManager.LoadScene(0);
+    }
+
+    public void rejouer()
+    {
+        resetFins();
+        AP.stopFadeMusic();
+        SceneManager.LoadScene(1);
+    }
+
+    public void resetFins()
+    {
+        GJH.jauges.physique = 50;
+        GJH.jauges.morale = 60;
+
+        finBallon.fin = (int)FinSeqBallon.Cas.NonPart;
+
+        finRecre.blesser = false;
+        finRecre.retard = false;
+
+        finSVT.binome = "";
+        finSVT.blesserBinome = false;
+        finSVT.blesserTom = false;
+
     }
 
 }

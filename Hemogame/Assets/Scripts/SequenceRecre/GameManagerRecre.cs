@@ -65,6 +65,11 @@ public class GameManagerRecre : MonoBehaviour
     [SerializeField]
     List<DialogDebRecre> diags;
 
+    [SerializeField]
+    FinSeqRecre finRecre;
+
+    [SerializeField]
+    AudioPlayer AP;
 
     // Start is called before the first frame update
     void Start()
@@ -115,10 +120,12 @@ public class GameManagerRecre : MonoBehaviour
                     DI.setSpeaker("Tom", colorTom);
                     DI.showDialogue(badFinRecre);
 
+                    finRecre.retard = true;
                     toDo = "retard";
                     return;
                 }
-
+                AP.stopFadeMusic();
+                finRecre.retard = false;
                 transi.triggerFermeture();
                 toDo = "";
             }
@@ -141,7 +148,7 @@ public class GameManagerRecre : MonoBehaviour
         //  DI.setSpeaker("Tom", colorTom);
         //  DI.showDialogue(introRecre);
         //  //toDo = "lancerPartie";
-
+        AP.playFadeMusic();
         StartCoroutine(diagDebutCor());
         
     }
@@ -193,6 +200,7 @@ public class GameManagerRecre : MonoBehaviour
 
     public void lancerQuestionAccident()
     {
+        finRecre.blesser = true;
         StartCoroutine(quesAccident());
     }
 
@@ -227,6 +235,7 @@ public class GameManagerRecre : MonoBehaviour
     IEnumerator lancerTransiFin(float seconde = 2)
     {
         yield return new WaitForSeconds(seconde);
+        AP.stopFadeMusic();
         transi.triggerFermeture();
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField]
+    GameObject mainTitle;
 
     [SerializeField]
     GameObject panelMain;
@@ -16,21 +18,47 @@ public class MainMenu : MonoBehaviour
     GameObject panelComment;
 
     [SerializeField]
+    GameObject panelPres;
+
+    [SerializeField]
     JaugesHemo jauges;
 
     [SerializeField]
     GameObject hiddenPanel;
+
+    [SerializeField]
+    FinSeqBallon finBallon;
+
+    [SerializeField]
+    FinSeqRecre finRecre;
+
+    [SerializeField]
+    FinSeqSVT finSVT;
+
+    [SerializeField]
+    AudioPlayer AP;
 
     private void Start()
     {
         Time.timeScale = 1;
         jauges.physique = 50;
         jauges.morale = 60;
+
+        finBallon.fin = (int)FinSeqBallon.Cas.NonPart;
+
+        finRecre.blesser = false;
+        finRecre.retard = false;
+
+        finSVT.binome = "";
+        finSVT.blesserBinome = false;
+        finSVT.blesserTom = false;
+        AP.playFadeMusic();
     }
     public void buttonJouer()
     {
         //SceneManager.LoadScene(1);
         SceneManager.LoadSceneAsync(1);
+        AP.stopFadeMusic();
     }
 
     public void buttonRetour()
@@ -62,5 +90,24 @@ public class MainMenu : MonoBehaviour
     public void showHiddenPanel()
     {
         hiddenPanel.SetActive(true);
+    }
+
+    public void buttonRetourPres()
+    {
+        //panelChapitres.SetActive(false);
+        //panelComment.SetActive(false);
+        panelPres.SetActive(false);
+        mainTitle.SetActive(true);
+        panelMain.SetActive(true);
+    }
+
+    public void buttonJouerToPres()
+    {
+        panelMain.SetActive(false);
+        panelChapitres.SetActive(false);
+        panelComment.SetActive(false);
+        mainTitle.SetActive(false);
+        panelMain.SetActive(false);
+        panelPres.SetActive(true);
     }
 }

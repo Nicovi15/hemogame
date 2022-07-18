@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: DialogFinProf
   m_EditorClassIdentifier: 
   dialogue:
-  - "Lorsque vous avez termin\xE9, vous pouvez passer \xE0 l'observation au microscope."
+  - "Vous avez termin\xE9 ? Bravo !"
+  - "N\u2019oubliez pas de prendre des notes pour compl\xE9ter le sch\xE9ma \xE0
+    rendre au prochain cours."
+  - "Prenez de l\u2019avance en attendant la fin de l\u2019heure."
   responses: []

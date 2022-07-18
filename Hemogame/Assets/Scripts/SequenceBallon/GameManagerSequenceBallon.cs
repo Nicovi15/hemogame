@@ -61,6 +61,9 @@ public class GameManagerSequenceBallon : MonoBehaviour
     [SerializeField]
     FinSeqBallon finBallon;
 
+    [SerializeField]
+    AudioPlayer AP;
+
 
     // Start is called before the first frame update
     void Start()
@@ -97,7 +100,7 @@ public class GameManagerSequenceBallon : MonoBehaviour
             }
             else if(toDo == "fin")
             {
-
+                AP.stopFadeMusic();
                 transi.triggerFermeture();
             }
 
@@ -119,7 +122,8 @@ public class GameManagerSequenceBallon : MonoBehaviour
         camPlayer.GetComponent<AudioListener>().enabled = false;
         camChoix.GetComponent<Animator>().SetTrigger("Travel");
         HUDechauf.SetActive(false);
-        finBallon.fin = (int)FinSeqBallon.Cas.PartEtBless;
+        if(currentReceveur.isHemo)
+            finBallon.fin = (int)FinSeqBallon.Cas.PartEtBless;
 
     }
 
@@ -144,6 +148,7 @@ public class GameManagerSequenceBallon : MonoBehaviour
     {
         toDo = "debuterBallon";
         DI.showDialogue(diagDebut);
+        AP.playFadeMusic();
     }
 
     public void dialogFin()

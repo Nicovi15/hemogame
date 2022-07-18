@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c4ecd2cb5c2b0409d671b1239f2e8e, type: 3}
   m_Name: finSVT
   m_EditorClassIdentifier: 
-  binome: Alex
+  binome: 
   blesserBinome: 0
   blesserTom: 0

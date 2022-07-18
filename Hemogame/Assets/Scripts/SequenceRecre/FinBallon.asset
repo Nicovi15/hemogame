@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6798dfe631c6008479756d009213b74e, type: 3}
   m_Name: FinBallon
   m_EditorClassIdentifier: 
-  fin: 1
+  fin: 2

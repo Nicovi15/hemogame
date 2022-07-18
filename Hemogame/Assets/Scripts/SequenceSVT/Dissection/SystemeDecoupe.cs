@@ -107,11 +107,19 @@ public class SystemeDecoupe : MonoBehaviour
     [SerializeField]
     GestionJaugeHemo jauges;
 
+    [SerializeField]
+    FinSeqSVT finSVT;
+
+    [SerializeField]
+    AudioPlayer AP;
+
     // Start is called before the first frame update
     void Start()
     {
         startSequence();
         //cd.TriggerDissec();
+
+        finSVT.binome = currentBinome.nom;
     }
 
     // Update is called once per frame
@@ -139,6 +147,7 @@ public class SystemeDecoupe : MonoBehaviour
             else if (toDo == "finProf")
             {
                 transi.triggerFermeture();
+                AP.stopFadeMusic();
             }
             else if(toDo == "debutDissec")
             {
@@ -371,6 +380,8 @@ public class SystemeDecoupe : MonoBehaviour
 
             hudDissec.SetActive(false);
 
+            finSVT.blesserBinome = true;
+
             questionAccident.GetComponent<QuestionAccidentDissec>().isHemo = false;
             questionAccident.GetComponent<QuestionAccidentDissec>().currentBinome = currentBinome;
             questionAccident.SetActive(true);
@@ -504,6 +515,7 @@ public class SystemeDecoupe : MonoBehaviour
 
     public void dialogueDebut()
     {
+        AP.playFadeMusic();
         DI.setSpeaker("Mme Morel", couleurProf);
         DI.showDialogue(dialogDebut);
         toDo = "debut";
@@ -580,6 +592,8 @@ public class SystemeDecoupe : MonoBehaviour
                 yield return null;
 
             hudDoigts.SetActive(false);
+
+            finSVT.blesserTom = true;
 
             questionAccident.GetComponent<QuestionAccidentDissec>().isHemo = true;
             questionAccident.GetComponent<QuestionAccidentDissec>().currentBinome = currentBinome;
