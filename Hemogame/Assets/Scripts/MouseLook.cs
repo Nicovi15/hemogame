@@ -23,10 +23,14 @@ public class MouseLook : MonoBehaviour
     [SerializeField]
     TransiMEP transi;
 
+    [SerializeField]
+    SettingsSave settings;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        mouseSensitivityX = settings.camSen;
+        mouseSensitivityY = settings.camSen;
     }
 
     // Update is called once per frame
@@ -62,5 +66,11 @@ public class MouseLook : MonoBehaviour
     private void OnDisable()
     {
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void updateSens()
+    {
+        mouseSensitivityX = settings.camSen;
+        mouseSensitivityY = settings.camSen;
     }
 }

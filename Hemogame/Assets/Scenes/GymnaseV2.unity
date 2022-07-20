@@ -394,6 +394,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1839711622449103041, guid: 1665eb0e9720a49469099cb1f31268bf, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: updateCam
+      objectReference: {fileID: 0}
     - target: {fileID: 2336942490537665707, guid: 1665eb0e9720a49469099cb1f31268bf, type: 3}
       propertyPath: m_Name
       value: IGMenu
@@ -481,6 +485,22 @@ PrefabInstance:
     - target: {fileID: 2336942490537665711, guid: 1665eb0e9720a49469099cb1f31268bf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651485708157434345, guid: 1665eb0e9720a49469099cb1f31268bf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4585446302444938766, guid: 1665eb0e9720a49469099cb1f31268bf, type: 3}
+      propertyPath: AP
+      value: 
+      objectReference: {fileID: 332102513}
+    - target: {fileID: 4585446302444938766, guid: 1665eb0e9720a49469099cb1f31268bf, type: 3}
+      propertyPath: ML
+      value: 
+      objectReference: {fileID: 597700962}
+    - target: {fileID: 9172303436562599807, guid: 1665eb0e9720a49469099cb1f31268bf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1665eb0e9720a49469099cb1f31268bf, type: 3}
@@ -4788,7 +4808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AS: {fileID: 332102512}
-  volume: 0.1
+  settings: {fileID: 11400000, guid: b56a760a04eb71a44b855256a6d8650d, type: 2}
   dureeFadeIn: 1
   dureeFadeOut: 0.3
 --- !u!4 &332102514
@@ -18769,6 +18789,7 @@ MonoBehaviour:
   playerTransform: {fileID: 896303842}
   dialogueUI: {fileID: 1726327010}
   transi: {fileID: 1197888979}
+  settings: {fileID: 11400000, guid: b56a760a04eb71a44b855256a6d8650d, type: 2}
 --- !u!1001 &608422962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24196,7 +24217,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 981809585}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0

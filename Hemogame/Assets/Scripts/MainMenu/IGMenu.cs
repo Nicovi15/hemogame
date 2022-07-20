@@ -11,6 +11,9 @@ public class IGMenu : MonoBehaviour
     [SerializeField]
     GameObject panelComment;
 
+    [SerializeField]
+    GameObject panelOption;
+
     CursorLockMode CLM;
     public bool cursorVisible;
 
@@ -25,7 +28,7 @@ public class IGMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
             if (panel.activeSelf)
                 disablePanel();
@@ -36,6 +39,8 @@ public class IGMenu : MonoBehaviour
 
     public void disablePanel()
     {
+        panelComment.SetActive(false);
+        panelOption.SetActive(false);
         panel.SetActive(false);
         Time.timeScale = 1;
         isOpened = false;
@@ -56,14 +61,21 @@ public class IGMenu : MonoBehaviour
 
     public void commentJouer()
     {
-        panel.SetActive(false);
+        //panel.SetActive(false);
         panelComment.SetActive(true);
+    }
+
+    public void options()
+    {
+        //panel.SetActive(false);
+        panelOption.SetActive(true);
     }
 
     public void boutonRetour()
     {
         panel.SetActive(true);
         panelComment.SetActive(false);
+        panelOption.SetActive(false);
     }
 
     public void retourMenu()

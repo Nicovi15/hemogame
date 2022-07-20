@@ -21,6 +21,12 @@ public class MainMenu : MonoBehaviour
     GameObject panelPres;
 
     [SerializeField]
+    GameObject panelOption;
+
+    [SerializeField]
+    GameObject panelCredits;
+
+    [SerializeField]
     JaugesHemo jauges;
 
     [SerializeField]
@@ -65,6 +71,8 @@ public class MainMenu : MonoBehaviour
     {
         panelChapitres.SetActive(false);
         panelComment.SetActive(false);
+        panelOption.SetActive(false);
+        panelCredits.SetActive(false);
         panelMain.SetActive(true);
     }
 
@@ -80,6 +88,20 @@ public class MainMenu : MonoBehaviour
         panelMain.SetActive(false);
         panelChapitres.SetActive(false);
         panelComment.SetActive(true);
+    }
+
+    public void buttonOption()
+    {
+        panelComment.SetActive(false);
+        panelMain.SetActive(false);
+        panelOption.SetActive(true);
+    }
+
+    public void buttonCredits()
+    {
+        panelComment.SetActive(false);
+        panelMain.SetActive(false);
+        panelCredits.SetActive(true);
     }
 
     public void buttonQuitter()

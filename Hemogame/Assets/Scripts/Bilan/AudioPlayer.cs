@@ -7,7 +7,7 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField]
     AudioSource AS;
 
-    public float volume;
+    public SettingsSave settings;
 
     public float dureeFadeIn;
 
@@ -28,22 +28,26 @@ public class AudioPlayer : MonoBehaviour
 
     public void playMusic()
     {
-        AS.volume = volume;
+        updateVolume();
+        AS.volume = settings.audioVolume;
         AS.Play();
     }
 
     public void stopMusic()
     {
+        updateVolume();
         AS.Stop();
     }
 
     public void playFadeMusic()
     {
+        updateVolume();
         StartCoroutine(fadeIn());
     }
 
     public void stopFadeMusic()
     {
+        updateVolume();
         StartCoroutine(fadeOut());
     }
 
@@ -54,10 +58,10 @@ public class AudioPlayer : MonoBehaviour
         while (t < dureeFadeIn)
         {
             t += Time.deltaTime;
-            AS.volume = Mathf.Lerp(0, volume, t / dureeFadeIn);
+            AS.volume = Mathf.Lerp(0, settings.audioVolume, t / dureeFadeIn);
             yield return null;
         }
-        AS.volume = volume;
+        AS.volume = settings.audioVolume;
     }
 
     IEnumerator fadeOut()
@@ -66,12 +70,17 @@ public class AudioPlayer : MonoBehaviour
         while (t < dureeFadeOut)
         {
             t += Time.deltaTime;
-            AS.volume = Mathf.Lerp(volume, 0, t / dureeFadeOut);
+            AS.volume = Mathf.Lerp(settings.audioVolume, 0, t / dureeFadeOut);
             yield return null;
         }
-        AS.volume = volume;
+        AS.volume = settings.audioVolume;
         AS.Stop();
     }
 
+
+    public void updateVolume()
+    {
+        AS.volume = settings.audioVolume;
+    }
 
 }
